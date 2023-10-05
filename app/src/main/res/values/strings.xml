@@ -1,4 +1,22 @@
 <resources>
     <string name="app_name">Applikasi Resep</string>
     <string name="title_bookmark">Bookmark</string>
+    <string name="search_by_name">Search by Name</string>
+    <string name="welcome_to_app_recipe">Welcome to App Recipe</string>
+    <string name="image_meal">Image meal</string>
+    <string name="meal_name">Meal Name</string>
+    <string name="popular_dish">Popular Dish</string>
+    <string name="category">Meal Category: %1$s </string>
+    <string name="area">Area</string>
+    <string name="image_detail">Image Detail</string>
+    <string name="from">From: %1$s</string>
+    <string name="ingredients">%1$s\n%2$s\n%3$s\n%4$s\n%5$s\n%6$s\n%7$s\n%8$s</string>
+    <string name="measure">%1$s\n%2$s\n%3$s\n%4$s\n%5$s\n%6$s\n%7$s\n%8$s</string>
+
+    <string name="instructions">Instructions</string>
+    <string name="all_instruction">All Instruction</string>
+    <string name="meal_category">Meal Category</string>
+    <string name="title_ingredient">Ingredient</string>
+    <string name="watch_youtube">Watch Youtube</string>
+    <string name="search_transition">Search Transition</string>
 </resources>

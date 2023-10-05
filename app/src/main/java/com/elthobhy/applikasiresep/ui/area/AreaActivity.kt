@@ -1,4 +1,4 @@
-package com.elthobhy.applikasiresep.area
+package com.elthobhy.applikasiresep.ui.area
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle

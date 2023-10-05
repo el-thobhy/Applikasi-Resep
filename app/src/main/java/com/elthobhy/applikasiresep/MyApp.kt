@@ -4,6 +4,7 @@ import android.app.Application
 import com.elthobhy.applikasiresep.core.di.database
 import com.elthobhy.applikasiresep.core.di.network
 import com.elthobhy.applikasiresep.core.di.repository
+import com.elthobhy.applikasiresep.di.adapter
 import com.elthobhy.applikasiresep.di.useCase
 import com.elthobhy.applikasiresep.di.viewModel
 import org.koin.android.ext.koin.androidContext
@@ -22,7 +23,8 @@ class MyApp: Application() {
                 repository,
                 database,
                 useCase,
-                viewModel
+                viewModel,
+                adapter
             )
         }
     }

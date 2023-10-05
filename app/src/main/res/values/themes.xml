@@ -3,7 +3,16 @@
     <style name="Base.Theme.ApplikasiResep" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+        <item name="fontFamily">@font/poppins_medium</item>
+        <item name="android:statusBarColor" >@color/black</item>
+        <item name="android:textColor">@color/black</item>
     </style>
 
     <style name="Theme.ApplikasiResep" parent="Base.Theme.ApplikasiResep" />
+
+
+    <style name="Background">
+        <item name="android:background">@color/white</item>
+    </style>
+
 </resources>
