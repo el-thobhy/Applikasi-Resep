@@ -2,9 +2,14 @@ plugins {
     id("com.android.dynamic-feature")
     id("org.jetbrains.kotlin.android")
 }
+
+apply {
+    from("../shared_dependencies.gradle")
+}
+
 android {
     namespace = "com.elthobhy.applikasiresep"
-    compileSdk = 33
+    compileSdk = 34
 
     defaultConfig {
         minSdk = 24
