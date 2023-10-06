@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    <androidx.cardview.widget.CardView
+        android:id="@+id/card_image"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:cardCornerRadius="20dp"
+        android:layout_margin="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <ImageView
+            android:id="@+id/image_popular"
+            android:layout_width="match_parent"
+            android:layout_height="203dp"
+            android:background="@drawable/content_bg"
+            android:contentDescription="@string/image_meal"
+            android:scaleType="centerCrop"
+            tools:src="@tools:sample/avatars" />
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/lottie"
+            app:lottie_autoPlay="true"
+            android:visibility="gone"
+            app:lottie_fileName="no_data_available.json"
+            android:layout_width="match_parent"
+            android:layout_height="203dp"/>
+    </androidx.cardview.widget.CardView>
+
+    <TextView
+        android:id="@+id/tv_meal_name"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/poppins_bold"
+        android:layout_marginTop="12dp"
+        android:layout_marginBottom="12dp"
+        android:text="@string/meal_name"
+        android:maxLines="2"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/card_image"
+        app:layout_constraintStart_toStartOf="@id/card_image"
+        app:layout_constraintTop_toBottomOf="@id/card_image" />
+</androidx.constraintlayout.widget.ConstraintLayout>

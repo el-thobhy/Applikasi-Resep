@@ -54,8 +54,21 @@ class DetailActivity : AppCompatActivity() {
                                     strIngredient6,
                                     strIngredient7,
                                     strIngredient8,
+                                    strIngredient9,
+                                    strIngredient10,
+                                    strIngredient11,
+                                    strIngredient12,
+                                    strIngredient13,
+                                    strIngredient14,
+                                    strIngredient15,
+                                    strIngredient16,
+                                    strIngredient17,
+                                    strIngredient18,
+                                    strIngredient19,
+                                    strIngredient20,
                                 )
-                                measure.text = getString(R.string.measure,
+                                measure.text = getString(
+                                    R.string.measure,
                                     strMeasure1,
                                     strMeasure2,
                                     strMeasure3,
@@ -64,17 +77,38 @@ class DetailActivity : AppCompatActivity() {
                                     strMeasure6,
                                     strMeasure7,
                                     strMeasure8,
-                                    )
+                                    strMeasure9,
+                                    strMeasure10,
+                                    strMeasure11,
+                                    strMeasure12,
+                                    strMeasure13,
+                                    strMeasure14,
+                                    strMeasure15,
+                                    strMeasure16,
+                                    strMeasure17,
+                                    strMeasure18,
+                                    strMeasure19,
+                                    strMeasure20,
+                                )
                                 contentInstructions.text = strInstructions
-                                youtube.addYouTubePlayerListener(object :AbstractYouTubePlayerListener(){
+                                youtube.addYouTubePlayerListener(object :
+                                    AbstractYouTubePlayerListener() {
                                     override fun onReady(youTubePlayer: YouTubePlayer) {
                                         super.onReady(youTubePlayer)
-                                        if(!strYoutube.equals("")){
+                                        if (!strYoutube.equals("")) {
                                             val idVid = strYoutube?.split("=")
-                                            youTubePlayer.loadOrCueVideo(lifecycle,idVid?.get(1).toString(),0F)
-                                        }else{
-                                            Log.e("link", "onReady: $strYoutube" )
-                                            Toast.makeText(this@DetailActivity,"Link youtube is empty", Toast.LENGTH_SHORT).show()
+                                            youTubePlayer.loadOrCueVideo(
+                                                lifecycle,
+                                                idVid?.get(1).toString(),
+                                                0F
+                                            )
+                                        } else {
+                                            Log.e("link", "onReady: $strYoutube")
+                                            Toast.makeText(
+                                                this@DetailActivity,
+                                                "Link youtube is empty",
+                                                Toast.LENGTH_SHORT
+                                            ).show()
                                         }
 
                                     }
@@ -84,13 +118,13 @@ class DetailActivity : AppCompatActivity() {
                                         error: PlayerConstants.PlayerError
                                     ) {
                                         super.onError(youTubePlayer, error)
-                                        Log.e("Error yuyup", "onError: $error" )
+                                        Log.e("Error yuyup", "onError: $error")
                                     }
                                 })
                             }
 
                         }
-                        Log.e("yuyup", "showDetail: ${it.data?.get(0)?.strYoutube}" )
+                        Log.e("yuyup", "showDetail: ${it.data?.get(0)?.strYoutube}")
                     }
 
                     Status.ERROR -> {}
@@ -98,9 +132,10 @@ class DetailActivity : AppCompatActivity() {
             }
         }
     }
-    private fun actionBar(){
+
+    private fun actionBar() {
         setSupportActionBar(binding.toolbar)
-        supportActionBar?.title=""
+        supportActionBar?.title = ""
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         binding.toolbar.setNavigationOnClickListener {
             finish()

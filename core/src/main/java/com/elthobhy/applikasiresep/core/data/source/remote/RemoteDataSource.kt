@@ -5,7 +5,8 @@ import com.elthobhy.applikasiresep.core.data.source.remote.network.ApiConfig
 import com.elthobhy.applikasiresep.core.data.source.remote.network.ApiResponse
 import com.elthobhy.applikasiresep.core.data.source.remote.response.MealsItem
 import com.elthobhy.applikasiresep.core.data.source.remote.response.MealsItemDetail
-import com.elthobhy.applikasiresep.core.data.source.remote.response.MealsItemPopular
+import com.elthobhy.applikasiresep.core.data.source.remote.response.MealsItemMain
+import com.elthobhy.applikasiresep.core.data.source.remote.response.MealsItemSearch
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
@@ -30,10 +31,10 @@ class RemoteDataSource {
         }.flowOn(Dispatchers.IO)
     }
 
-    suspend fun getListPopular() : Flow<ApiResponse<List<MealsItemPopular>>> {
+    suspend fun getListMain() : Flow<ApiResponse<List<MealsItemMain>>> {
         return flow {
             try {
-                val response = ApiConfig.getApiService().getPopular("American")
+                val response = ApiConfig.getApiService().getMain("American")
                 val list = response.meals
                 if(list.isNotEmpty()){
                     emit(ApiResponse.Success(list))
@@ -58,6 +59,24 @@ class RemoteDataSource {
                 }else{
                     emit(ApiResponse.Empty)
                     Log.e("response kosong", "getListArea: $list" )
+                }
+            } catch (e: Exception) {
+                emit(ApiResponse.Error(e.message.toString()))
+            }
+        }.flowOn(Dispatchers.IO)
+    }
+
+    suspend fun getSearch(name: String) : Flow<ApiResponse<List<MealsItemSearch>>> {
+        return flow {
+            try {
+                val response = ApiConfig.getApiService().getSearch(name)
+                val list = response.meals
+                if(list.isNotEmpty()){
+                    emit(ApiResponse.Success(list))
+                    Log.e("response", "getSearch: $list" )
+                }else{
+                    emit(ApiResponse.Empty)
+                    Log.e("response kosong", "getListSearcg: $list" )
                 }
             } catch (e: Exception) {
                 emit(ApiResponse.Error(e.message.toString()))

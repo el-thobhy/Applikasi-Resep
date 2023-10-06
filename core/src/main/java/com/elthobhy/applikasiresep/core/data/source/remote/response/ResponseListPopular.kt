@@ -5,10 +5,10 @@ import com.google.gson.annotations.SerializedName
 data class ResponseListPopular(
 
 	@field:SerializedName("meals")
-	val meals: List<MealsItemPopular>
+	val meals: List<MealsItemMain>
 )
 
-data class MealsItemPopular(
+data class MealsItemMain(
 
 	@field:SerializedName("strMealThumb")
 	val strMealThumb: String? = null,

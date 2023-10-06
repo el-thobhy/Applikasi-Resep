@@ -4,7 +4,7 @@ import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
-data class DomainPopular(
+data class DomainMain(
     val strMealThumb: String? = null,
     val idMeal: String,
     val strMeal: String? = null

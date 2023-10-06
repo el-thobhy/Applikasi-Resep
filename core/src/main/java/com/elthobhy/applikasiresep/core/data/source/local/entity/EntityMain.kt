@@ -5,7 +5,7 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 @Entity(tableName = "tabel_popular")
-data class EntityPopular(
+data class EntityMain(
     @ColumnInfo(name = "strMealThumb")
     val strMealThumb: String? = null,
 

@@ -3,6 +3,7 @@ package com.elthobhy.applikasiresep.core.data.source.remote.network
 import com.elthobhy.applikasiresep.core.data.source.remote.response.ResponseDetailMeal
 import com.elthobhy.applikasiresep.core.data.source.remote.response.ResponseListArea
 import com.elthobhy.applikasiresep.core.data.source.remote.response.ResponseListPopular
+import com.elthobhy.applikasiresep.core.data.source.remote.response.ResponseSearch
 import retrofit2.http.GET
 import retrofit2.http.Query
 
@@ -13,7 +14,7 @@ interface ApiService {
     ): ResponseListArea
 
     @GET("filter.php")
-    suspend fun getPopular(
+    suspend fun getMain(
         @Query("a") a: String
     ): ResponseListPopular
 
@@ -21,4 +22,9 @@ interface ApiService {
     suspend fun getDetail(
         @Query("i") i: String
     ): ResponseDetailMeal
+
+    @GET("search.php")
+    suspend fun getSearch(
+        @Query("s") s: String
+    ): ResponseSearch
 }

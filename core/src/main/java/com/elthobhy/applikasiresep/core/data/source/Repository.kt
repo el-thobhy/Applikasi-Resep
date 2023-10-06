@@ -5,10 +5,12 @@ import com.elthobhy.applikasiresep.core.data.source.remote.RemoteDataSource
 import com.elthobhy.applikasiresep.core.data.source.remote.network.ApiResponse
 import com.elthobhy.applikasiresep.core.data.source.remote.response.MealsItem
 import com.elthobhy.applikasiresep.core.data.source.remote.response.MealsItemDetail
-import com.elthobhy.applikasiresep.core.data.source.remote.response.MealsItemPopular
+import com.elthobhy.applikasiresep.core.data.source.remote.response.MealsItemMain
+import com.elthobhy.applikasiresep.core.data.source.remote.response.MealsItemSearch
 import com.elthobhy.applikasiresep.core.domain.model.DomainArea
 import com.elthobhy.applikasiresep.core.domain.model.DomainDetail
-import com.elthobhy.applikasiresep.core.domain.model.DomainPopular
+import com.elthobhy.applikasiresep.core.domain.model.DomainMain
+import com.elthobhy.applikasiresep.core.domain.model.DomainSearch
 import com.elthobhy.applikasiresep.core.domain.repository.RepositoryInterface
 import com.elthobhy.applikasiresep.core.utils.DataMapper
 import kotlinx.coroutines.flow.Flow
@@ -39,22 +41,22 @@ class Repository(
             }
         }.asFlow()
 
-    override fun getPopular(): Flow<Resource<List<DomainPopular>>> =
-        object : NetworkBoundResource<List<DomainPopular>, List<MealsItemPopular>>(){
-            override fun loadFromDB(): Flow<List<DomainPopular>> {
-                return local.getPopular().map { DataMapper.entityPopularToDomainPopular(it) }
+    override fun getMain(): Flow<Resource<List<DomainMain>>> =
+        object : NetworkBoundResource<List<DomainMain>, List<MealsItemMain>>(){
+            override fun loadFromDB(): Flow<List<DomainMain>> {
+                return local.getMain().map { DataMapper.entityMainToDomainMain(it) }
             }
 
-            override suspend fun createCall(): Flow<ApiResponse<List<MealsItemPopular>>> {
-                return remote.getListPopular()
+            override suspend fun createCall(): Flow<ApiResponse<List<MealsItemMain>>> {
+                return remote.getListMain()
             }
 
-            override suspend fun saveCallResult(data: List<MealsItemPopular>) {
-                val dataMap = DataMapper.responPopularToEntityPopular(data)
-                return local.insertPopular(dataMap)
+            override suspend fun saveCallResult(data: List<MealsItemMain>) {
+                val dataMap = DataMapper.responMainToEntityMain(data)
+                return local.insertMain(dataMap)
             }
 
-            override fun shouldFetch(data: List<DomainPopular>?): Boolean {
+            override fun shouldFetch(data: List<DomainMain>?): Boolean {
                 return data == null || data.isEmpty()
             }
         }.asFlow()
@@ -75,6 +77,26 @@ class Repository(
             }
 
             override fun shouldFetch(data: List<DomainDetail>?): Boolean {
+                return data == null || data.isEmpty()
+            }
+        }.asFlow()
+
+    override fun getSearch(name: String): Flow<Resource<List<DomainSearch>>> =
+        object : NetworkBoundResource<List<DomainSearch>, List<MealsItemSearch>>(){
+            override fun loadFromDB(): Flow<List<DomainSearch>> {
+                return local.getSearch(name).map { DataMapper.entitySearchToDomainSearch(it) }
+            }
+
+            override suspend fun createCall(): Flow<ApiResponse<List<MealsItemSearch>>> {
+                return remote.getSearch(name)
+            }
+
+            override suspend fun saveCallResult(data: List<MealsItemSearch>) {
+                val dataMap = DataMapper.responSearchToEntitySearch(data)
+                return local.insertSearch(dataMap)
+            }
+
+            override fun shouldFetch(data: List<DomainSearch>?): Boolean {
                 return data == null || data.isEmpty()
             }
         }.asFlow()
