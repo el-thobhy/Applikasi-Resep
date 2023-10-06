@@ -1,14 +1,17 @@
 package com.elthobhy.applikasiresep.core.utils
 
 import com.elthobhy.applikasiresep.core.data.source.local.entity.EntityArea
+import com.elthobhy.applikasiresep.core.data.source.local.entity.EntityCategory
 import com.elthobhy.applikasiresep.core.data.source.local.entity.EntityDetail
 import com.elthobhy.applikasiresep.core.data.source.local.entity.EntityMain
 import com.elthobhy.applikasiresep.core.data.source.local.entity.EntitySearch
+import com.elthobhy.applikasiresep.core.data.source.remote.response.CategoriesItem
 import com.elthobhy.applikasiresep.core.data.source.remote.response.MealsItem
 import com.elthobhy.applikasiresep.core.data.source.remote.response.MealsItemDetail
 import com.elthobhy.applikasiresep.core.data.source.remote.response.MealsItemMain
 import com.elthobhy.applikasiresep.core.data.source.remote.response.MealsItemSearch
 import com.elthobhy.applikasiresep.core.domain.model.DomainArea
+import com.elthobhy.applikasiresep.core.domain.model.DomainCategory
 import com.elthobhy.applikasiresep.core.domain.model.DomainDetail
 import com.elthobhy.applikasiresep.core.domain.model.DomainMain
 import com.elthobhy.applikasiresep.core.domain.model.DomainSearch
@@ -318,6 +321,36 @@ object DataMapper {
                     strMeasure14 = it.strMeasure14,
                     strMeasure15 = it.strMeasure15,
                 )
+            }
+            if (list != null) {
+                out.add(list)
+            }
+        }
+        return out
+    }
+    fun entityCategoryToDomainCategory(input: List<EntityCategory>): List<DomainCategory> {
+        val out = ArrayList<DomainCategory>()
+        input.map {
+            val list = DomainCategory(
+                idCategory = it.idCategory,
+                strCategory = it.strCategory,
+                strCategoryDescription = it.strCategoryDescription,
+                strCategoryThumb = it.strCategoryThumb
+            )
+            out.add(list)
+        }
+        return out
+    }
+    fun responCategoryToEntityCategory(input: List<CategoriesItem>): List<EntityCategory>{
+        val out = ArrayList<EntityCategory>()
+        input.map {
+            val list = it.idCategory?.let { it1 ->
+                EntityCategory(
+                    idCategory = it1,
+                    strCategoryThumb = it.strCategoryThumb,
+                    strCategoryDescription = it.strCategoryDescription,
+                    strCategory = it.strCategory
+                    )
             }
             if (list != null) {
                 out.add(list)

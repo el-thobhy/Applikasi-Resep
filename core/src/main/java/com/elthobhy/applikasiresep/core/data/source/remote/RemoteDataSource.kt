@@ -3,6 +3,7 @@ package com.elthobhy.applikasiresep.core.data.source.remote
 import android.util.Log
 import com.elthobhy.applikasiresep.core.data.source.remote.network.ApiConfig
 import com.elthobhy.applikasiresep.core.data.source.remote.network.ApiResponse
+import com.elthobhy.applikasiresep.core.data.source.remote.response.CategoriesItem
 import com.elthobhy.applikasiresep.core.data.source.remote.response.MealsItem
 import com.elthobhy.applikasiresep.core.data.source.remote.response.MealsItemDetail
 import com.elthobhy.applikasiresep.core.data.source.remote.response.MealsItemMain
@@ -38,10 +39,10 @@ class RemoteDataSource {
                 val list = response.meals
                 if(list.isNotEmpty()){
                     emit(ApiResponse.Success(list))
-                    Log.e("response", "getListArea: $list" )
+                    Log.e("response", "getListMain: $list" )
                 }else{
                     emit(ApiResponse.Empty)
-                    Log.e("response kosong", "getListArea: $list" )
+                    Log.e("response kosong", "getListMain: $list" )
                 }
             } catch (e: Exception) {
                 emit(ApiResponse.Error(e.message.toString()))
@@ -58,7 +59,7 @@ class RemoteDataSource {
                     Log.e("response", "getDetail: $list" )
                 }else{
                     emit(ApiResponse.Empty)
-                    Log.e("response kosong", "getListArea: $list" )
+                    Log.e("response kosong", "getDetail: $list" )
                 }
             } catch (e: Exception) {
                 emit(ApiResponse.Error(e.message.toString()))
@@ -77,6 +78,23 @@ class RemoteDataSource {
                 }else{
                     emit(ApiResponse.Empty)
                     Log.e("response kosong", "getListSearcg: $list" )
+                }
+            } catch (e: Exception) {
+                emit(ApiResponse.Error(e.message.toString()))
+            }
+        }.flowOn(Dispatchers.IO)
+    }
+    suspend fun getCategory() : Flow<ApiResponse<List<CategoriesItem>>> {
+        return flow {
+            try {
+                val response = ApiConfig.getApiService().getCategory()
+                val list = response.categories
+                if(list.isNotEmpty()){
+                    emit(ApiResponse.Success(list))
+                    Log.e("response", "getCategory: $list" )
+                }else{
+                    emit(ApiResponse.Empty)
+                    Log.e("response kosong", "getCategory: $list" )
                 }
             } catch (e: Exception) {
                 emit(ApiResponse.Error(e.message.toString()))

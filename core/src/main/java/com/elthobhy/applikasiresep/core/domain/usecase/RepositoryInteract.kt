@@ -2,6 +2,7 @@ package com.elthobhy.applikasiresep.core.domain.usecase
 
 import com.elthobhy.applikasiresep.core.data.source.Resource
 import com.elthobhy.applikasiresep.core.domain.model.DomainArea
+import com.elthobhy.applikasiresep.core.domain.model.DomainCategory
 import com.elthobhy.applikasiresep.core.domain.model.DomainDetail
 import com.elthobhy.applikasiresep.core.domain.model.DomainMain
 import com.elthobhy.applikasiresep.core.domain.model.DomainSearch
@@ -13,4 +14,5 @@ class RepositoryInteract(private val repo: RepositoryInterface): UseCase {
     override fun getMain(): Flow<Resource<List<DomainMain>>> = repo.getMain()
     override fun getDetail(id: String): Flow<Resource<List<DomainDetail>>> = repo.getDetail(id)
     override fun getSearch(name: String): Flow<Resource<List<DomainSearch>>> = repo.getSearch(name)
+    override fun getCategory(): Flow<Resource<List<DomainCategory>>> = repo.getCategory()
 }

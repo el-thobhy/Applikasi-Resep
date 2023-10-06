@@ -5,6 +5,7 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.elthobhy.applikasiresep.core.data.source.local.entity.EntityArea
+import com.elthobhy.applikasiresep.core.data.source.local.entity.EntityCategory
 import com.elthobhy.applikasiresep.core.data.source.local.entity.EntityDetail
 import com.elthobhy.applikasiresep.core.data.source.local.entity.EntityMain
 import com.elthobhy.applikasiresep.core.data.source.local.entity.EntitySearch
@@ -18,11 +19,18 @@ interface Dao {
     @Query("SELECT * FROM tabel_popular")
     fun getPopular(): Flow<List<EntityMain>>
 
+    @Query("SELECT * FROM tabel_category")
+    fun getCategory(): Flow<List<EntityCategory>>
+
     @Query("SELECT * FROM detail_tabel WHERE idMeal = :id ")
     fun getDetail(id: String): Flow<List<EntityDetail>>
 
     @Query("SELECT * FROM table_search WHERE strMeal LIKE '%' || :name || '%'")
     fun getSearch(name: String): Flow<List<EntitySearch>>
+
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertCategory(entityCategory: List<EntityCategory>)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertSearch(entitySearch: List<EntitySearch>)

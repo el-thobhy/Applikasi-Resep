@@ -4,15 +4,17 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityOptionsCompat
 import androidx.core.util.Pair
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.elthobhy.applikasiresep.R
-import com.elthobhy.applikasiresep.ui.area.AreaActivity
 import com.elthobhy.applikasiresep.core.domain.model.DomainMain
 import com.elthobhy.applikasiresep.core.utils.Constants
 import com.elthobhy.applikasiresep.core.utils.Status
 import com.elthobhy.applikasiresep.databinding.ActivityMainBinding
+import com.elthobhy.applikasiresep.databinding.LayoutDialogBinding
 import com.elthobhy.applikasiresep.ui.detail.DetailActivity
 import com.elthobhy.applikasiresep.ui.search.SearchActivity
 import org.koin.android.ext.android.inject
@@ -22,6 +24,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private val homeViewModel by inject<HomeViewModel>()
     private val adapterMain by inject<AdapterMain>()
+    private val adapterCategory by inject<AdapterCategory>()
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -44,6 +47,40 @@ class MainActivity : AppCompatActivity() {
                 Intent(this,SearchActivity::class.java),
                 optionsCompat.toBundle()
             )
+        }
+        binding.card.setOnClickListener {
+            showDialogCategory()
+        }
+    }
+
+    private fun showDialogCategory() {
+        val dialogBinding = LayoutDialogBinding.inflate(layoutInflater)
+        val alert = AlertDialog.Builder(this)
+            .setView(dialogBinding.root)
+            .setCancelable(true)
+        alert.show().window?.decorView?.setBackgroundResource(android.R.color.transparent)
+        showRvCategory(dialogBinding)
+        getDataCategory()
+
+    }
+
+    private fun showRvCategory(dialogBinding: LayoutDialogBinding) {
+        dialogBinding.rvCategory.apply {
+            layoutManager = GridLayoutManager(this@MainActivity, 4,GridLayoutManager.VERTICAL,false)
+            setHasFixedSize(true)
+            adapter = adapterCategory
+        }
+    }
+
+    private fun getDataCategory() {
+        homeViewModel.getCategory().observe(this){
+            when(it.status){
+                Status.LOADING -> {}
+                Status.SUCCESS -> {
+                    adapterCategory.submitList(it.data)
+                }
+                Status.ERROR -> {}
+            }
         }
     }
 

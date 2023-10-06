@@ -1,5 +1,6 @@
 package com.elthobhy.applikasiresep.core.data.source.remote.network
 
+import com.elthobhy.applikasiresep.core.data.source.remote.response.ResponseCategory
 import com.elthobhy.applikasiresep.core.data.source.remote.response.ResponseDetailMeal
 import com.elthobhy.applikasiresep.core.data.source.remote.response.ResponseListArea
 import com.elthobhy.applikasiresep.core.data.source.remote.response.ResponseListPopular
@@ -27,4 +28,7 @@ interface ApiService {
     suspend fun getSearch(
         @Query("s") s: String
     ): ResponseSearch
+
+    @GET("categories.php")
+    suspend fun getCategory(): ResponseCategory
 }
