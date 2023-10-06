@@ -14,10 +14,10 @@ import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
 
 class RemoteDataSource {
-    suspend fun getListArea() : Flow<ApiResponse<List<MealsItem>>> {
+    suspend fun getListCategory(strCategory: String) : Flow<ApiResponse<List<MealsItemMain>>> {
         return flow {
             try {
-                val response = ApiConfig.getApiService().getArea("list")
+                val response = ApiConfig.getApiService().getListCategory(strCategory)
                 val list = response.meals
                 if(list.isNotEmpty()){
                     emit(ApiResponse.Success(list))

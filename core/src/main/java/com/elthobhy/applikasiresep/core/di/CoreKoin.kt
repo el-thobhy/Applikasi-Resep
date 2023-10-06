@@ -18,7 +18,7 @@ val repository = module {
     single { LocalDataSource(get()) }
     single { RemoteDataSource() }
     factory { AppExecutors() }
-    single<RepositoryInterface> { Repository(get(),get()) }
+    single<RepositoryInterface> { Repository(get(),get(),get()) }
 }
 val database = module {
     factory { get<Database>().dao() }

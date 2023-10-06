@@ -30,104 +30,116 @@ class DetailActivity : AppCompatActivity() {
     }
 
     private fun showDetail() {
-        val intent = intent.getStringExtra(Constants.ID_MEAL)
-        if (intent != null) {
-            detailViewModel.getDetail(intent).observe(this) {
-                when (it.status) {
-                    Status.LOADING -> {}
-                    Status.SUCCESS -> {
-                        binding.apply {
-                            it.data?.get(0)?.apply {
-                                Glide.with(this@DetailActivity)
-                                    .load(strMealThumb)
-                                    .into(ivDetail)
-                                tvName.text = strMeal
-                                tvAsal.text = getString(R.string.from, strArea)
-                                tvCategory.text = getString(R.string.category, strCategory)
-                                ingredient.text = getString(
-                                    R.string.ingredients,
-                                    strIngredient1,
-                                    strIngredient2,
-                                    strIngredient3,
-                                    strIngredient4,
-                                    strIngredient5,
-                                    strIngredient6,
-                                    strIngredient7,
-                                    strIngredient8,
-                                    strIngredient9,
-                                    strIngredient10,
-                                    strIngredient11,
-                                    strIngredient12,
-                                    strIngredient13,
-                                    strIngredient14,
-                                    strIngredient15,
-                                    strIngredient16,
-                                    strIngredient17,
-                                    strIngredient18,
-                                    strIngredient19,
-                                    strIngredient20,
-                                )
-                                measure.text = getString(
-                                    R.string.measure,
-                                    strMeasure1,
-                                    strMeasure2,
-                                    strMeasure3,
-                                    strMeasure4,
-                                    strMeasure5,
-                                    strMeasure6,
-                                    strMeasure7,
-                                    strMeasure8,
-                                    strMeasure9,
-                                    strMeasure10,
-                                    strMeasure11,
-                                    strMeasure12,
-                                    strMeasure13,
-                                    strMeasure14,
-                                    strMeasure15,
-                                    strMeasure16,
-                                    strMeasure17,
-                                    strMeasure18,
-                                    strMeasure19,
-                                    strMeasure20,
-                                )
-                                contentInstructions.text = strInstructions
-                                youtube.addYouTubePlayerListener(object :
-                                    AbstractYouTubePlayerListener() {
-                                    override fun onReady(youTubePlayer: YouTubePlayer) {
-                                        super.onReady(youTubePlayer)
-                                        if (!strYoutube.equals("")) {
-                                            val idVid = strYoutube?.split("=")
-                                            youTubePlayer.loadOrCueVideo(
-                                                lifecycle,
-                                                idVid?.get(1).toString(),
-                                                0F
-                                            )
-                                        } else {
-                                            Log.e("link", "onReady: $strYoutube")
-                                            Toast.makeText(
-                                                this@DetailActivity,
-                                                "Link youtube is empty",
-                                                Toast.LENGTH_SHORT
-                                            ).show()
-                                        }
+        val intent1 = intent.getStringExtra(Constants.ID_MEAL)
+        val intent2 = intent.getStringExtra(Constants.DATA_CATEGORY)
+        Log.e("TAG", "showDetail: $intent2" )
+        Log.e("TAG2", "showDetail: $intent1" )
+        if (intent1 != null) {
+            getData(intent1)
+        }
+        if(intent2 !=null){
+            getData(intent2)
+        }
+    }
 
+    private fun getData(intent: String) {
+        detailViewModel.getDetail(intent).observe(this) {
+            when (it.status) {
+                Status.LOADING -> {}
+                Status.SUCCESS -> {
+                    binding.apply {
+                        it.data?.get(0)?.apply {
+                            Glide.with(this@DetailActivity)
+                                .load(strMealThumb)
+                                .into(ivDetail)
+                            tvName.text = strMeal
+                            tvAsal.text = getString(R.string.from, strArea)
+                            tvCategory.text = getString(R.string.category, strCategory)
+                            ingredient.text = getString(
+                                R.string.ingredients,
+                                strIngredient1,
+                                strIngredient2,
+                                strIngredient3,
+                                strIngredient4,
+                                strIngredient5,
+                                strIngredient6,
+                                strIngredient7,
+                                strIngredient8,
+                                strIngredient9,
+                                strIngredient10,
+                                strIngredient11,
+                                strIngredient12,
+                                strIngredient13,
+                                strIngredient14,
+                                strIngredient15,
+                                strIngredient16,
+                                strIngredient17,
+                                strIngredient18,
+                                strIngredient19,
+                                strIngredient20,
+                            )
+                            measure.text = getString(
+                                R.string.measure,
+                                strMeasure1,
+                                strMeasure2,
+                                strMeasure3,
+                                strMeasure4,
+                                strMeasure5,
+                                strMeasure6,
+                                strMeasure7,
+                                strMeasure8,
+                                strMeasure9,
+                                strMeasure10,
+                                strMeasure11,
+                                strMeasure12,
+                                strMeasure13,
+                                strMeasure14,
+                                strMeasure15,
+                                strMeasure16,
+                                strMeasure17,
+                                strMeasure18,
+                                strMeasure19,
+                                strMeasure20,
+                            )
+                            contentInstructions.text = strInstructions
+                            youtube.addYouTubePlayerListener(object :
+                                AbstractYouTubePlayerListener() {
+                                override fun onReady(youTubePlayer: YouTubePlayer) {
+                                    super.onReady(youTubePlayer)
+                                    if (!strYoutube.equals("")) {
+                                        val idVid = strYoutube?.split("=")
+                                        youTubePlayer.loadOrCueVideo(
+                                            lifecycle,
+                                            idVid?.get(1).toString(),
+                                            0F
+                                        )
+                                    } else {
+                                        Log.e("link", "onReady: $strYoutube")
+                                        Toast.makeText(
+                                            this@DetailActivity,
+                                            "Link youtube is empty",
+                                            Toast.LENGTH_SHORT
+                                        ).show()
                                     }
 
-                                    override fun onError(
-                                        youTubePlayer: YouTubePlayer,
-                                        error: PlayerConstants.PlayerError
-                                    ) {
-                                        super.onError(youTubePlayer, error)
-                                        Log.e("Error yuyup", "onError: $error")
-                                    }
-                                })
-                            }
+                                }
 
+                                override fun onError(
+                                    youTubePlayer: YouTubePlayer,
+                                    error: PlayerConstants.PlayerError
+                                ) {
+                                    super.onError(youTubePlayer, error)
+                                    Log.e("Error yuyup", "onError: $error")
+                                }
+                            })
                         }
-                        Log.e("yuyup", "showDetail: ${it.data?.get(0)?.strYoutube}")
-                    }
 
-                    Status.ERROR -> {}
+                    }
+                    Log.e("yuyup", "showDetail: ${it.data?.get(0)?.strYoutube}")
+                }
+
+                Status.ERROR -> {
+                    Log.e("TAGi", "getData: ${it.message}" )
                 }
             }
         }

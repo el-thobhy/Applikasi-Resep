@@ -4,6 +4,8 @@ import com.elthobhy.applikasiresep.ui.area.AreaViewModel
 import com.elthobhy.applikasiresep.core.domain.usecase.RepositoryInteract
 import com.elthobhy.applikasiresep.core.domain.usecase.UseCase
 import com.elthobhy.applikasiresep.ui.detail.DetailViewModel
+import com.elthobhy.applikasiresep.ui.detail.detailcatagory.DetailCategoryMealAdapter
+import com.elthobhy.applikasiresep.ui.detail.detailcatagory.DetailCategoryViewModel
 import com.elthobhy.applikasiresep.ui.home.AdapterCategory
 import com.elthobhy.applikasiresep.ui.home.AdapterMain
 import com.elthobhy.applikasiresep.ui.home.HomeViewModel
@@ -24,9 +26,11 @@ val viewModel = module {
     single { HomeViewModel(get()) }
     single { DetailViewModel(get()) }
     single { SearchViewModel(get()) }
+    single { DetailCategoryViewModel(get()) }
 }
 val adapter = module {
     single { AdapterMain() }
     single { AdapterSearch() }
     single { AdapterCategory() }
+    single { DetailCategoryMealAdapter() }
 }

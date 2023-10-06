@@ -1,7 +1,8 @@
 package com.elthobhy.applikasiresep.core.utils
 
-import com.elthobhy.applikasiresep.core.data.source.local.entity.EntityArea
+import com.elthobhy.applikasiresep.core.data.source.local.entity.Entity
 import com.elthobhy.applikasiresep.core.data.source.local.entity.EntityCategory
+import com.elthobhy.applikasiresep.core.data.source.local.entity.EntityCategoryMeal
 import com.elthobhy.applikasiresep.core.data.source.local.entity.EntityDetail
 import com.elthobhy.applikasiresep.core.data.source.local.entity.EntityMain
 import com.elthobhy.applikasiresep.core.data.source.local.entity.EntitySearch
@@ -10,17 +11,18 @@ import com.elthobhy.applikasiresep.core.data.source.remote.response.MealsItem
 import com.elthobhy.applikasiresep.core.data.source.remote.response.MealsItemDetail
 import com.elthobhy.applikasiresep.core.data.source.remote.response.MealsItemMain
 import com.elthobhy.applikasiresep.core.data.source.remote.response.MealsItemSearch
-import com.elthobhy.applikasiresep.core.domain.model.DomainArea
+import com.elthobhy.applikasiresep.core.domain.model.Domain
 import com.elthobhy.applikasiresep.core.domain.model.DomainCategory
 import com.elthobhy.applikasiresep.core.domain.model.DomainDetail
 import com.elthobhy.applikasiresep.core.domain.model.DomainMain
+import com.elthobhy.applikasiresep.core.domain.model.DomainMeal
 import com.elthobhy.applikasiresep.core.domain.model.DomainSearch
 
 object DataMapper {
-    fun entityAreaToDomainArea(input: List<EntityArea>): List<DomainArea> {
-        val out = ArrayList<DomainArea>()
+    fun entityToDomain(input: List<Entity>): List<Domain> {
+        val out = ArrayList<Domain>()
         input.map {
-            val list = DomainArea(
+            val list = Domain(
                 strArea = it.strArea
             )
             out.add(list)
@@ -28,10 +30,10 @@ object DataMapper {
         return out
     }
 
-    fun responAreaToEntityArea(input: List<MealsItem>): List<EntityArea> {
-        val out = ArrayList<EntityArea>()
+    fun responToEntity(input: List<MealsItem>): List<Entity> {
+        val out = ArrayList<Entity>()
         input.map {
-            val list = EntityArea(
+            val list = Entity(
                 strArea = it.strArea
             )
             out.add(list)
@@ -328,6 +330,7 @@ object DataMapper {
         }
         return out
     }
+
     fun entityCategoryToDomainCategory(input: List<EntityCategory>): List<DomainCategory> {
         val out = ArrayList<DomainCategory>()
         input.map {
@@ -341,7 +344,8 @@ object DataMapper {
         }
         return out
     }
-    fun responCategoryToEntityCategory(input: List<CategoriesItem>): List<EntityCategory>{
+
+    fun responCategoryToEntityCategory(input: List<CategoriesItem>): List<EntityCategory> {
         val out = ArrayList<EntityCategory>()
         input.map {
             val list = it.idCategory?.let { it1 ->
@@ -350,7 +354,7 @@ object DataMapper {
                     strCategoryThumb = it.strCategoryThumb,
                     strCategoryDescription = it.strCategoryDescription,
                     strCategory = it.strCategory
-                    )
+                )
             }
             if (list != null) {
                 out.add(list)
@@ -358,4 +362,125 @@ object DataMapper {
         }
         return out
     }
+
+    fun entityMealToDomainMeal(input: List<EntityCategoryMeal>): List<DomainMeal> {
+        val out = ArrayList<DomainMeal>()
+        input.map {
+            val list = DomainMeal(
+                strMealThumb = it.strMealThumb,
+                strMeal = it.strMeal,
+                idMeal = it.idMeal,
+                isBeef = it.isBeef,
+                isBreakfast = it.isBreakfast,
+                isChicken = it.isChicken,
+                isDessert = it.isDessert,
+                isGoat = it.isGoat,
+                isLamb = it.isLamb,
+                isMiscellaneous = it.isMiscellaneous,
+                isPasta = it.isPasta,
+                isPork = it.isPork,
+                isSeafood = it.isSeafood,
+                isSide = it.isSide,
+                isStarter = it.isStarter,
+                isVegan = it.isVegan,
+                isVegetarian = it.isVegetarian
+            )
+            out.add(list)
+        }
+        return out
+    }
+
+    fun responMealToEntityMeal(input: List<MealsItemMain>,isBeef: Boolean,
+                               isBreakfast: Boolean,
+                               isChicken: Boolean,
+                               isDessert: Boolean,
+                               isGoat: Boolean,
+                               isLamb: Boolean,
+                               isMiscellaneous: Boolean,
+                               isPasta: Boolean,
+                               isPork: Boolean,
+                               isSeafood: Boolean,
+                               isSide: Boolean,
+                               isStarter: Boolean,
+                               isVegan: Boolean,
+                               isVegetarian: Boolean,): List<EntityCategoryMeal> {
+        val out = ArrayList<EntityCategoryMeal>()
+        input.map {
+            val list = it.idMeal?.let { it1 ->
+                EntityCategoryMeal(
+                    strMealThumb = it.strMealThumb,
+                    strMeal = it.strMeal,
+                    idMeal = it1,
+                    isBeef = isBeef,
+                    isBreakfast = isBreakfast,
+                    isChicken = isChicken,
+                    isDessert = isDessert,
+                    isGoat = isGoat,
+                    isLamb = isLamb,
+                    isMiscellaneous = isMiscellaneous,
+                    isPasta = isPasta,
+                    isPork = isPork,
+                    isSeafood = isSeafood,
+                    isSide = isSide,
+                    isStarter = isStarter,
+                    isVegan = isVegan,
+                    isVegetarian = isVegetarian
+                )
+            }
+            if (list != null) {
+                out.add(list)
+            }
+        }
+        return out
+    }
+
+    fun domainMealToEntityMeal(data: List<DomainMeal>): List<EntityCategoryMeal> {
+        val out = ArrayList<EntityCategoryMeal>()
+        data.map {
+            val list = EntityCategoryMeal(
+                idMeal = it.idMeal,
+                strMeal = it.strMeal,
+                strMealThumb = it.strMealThumb,
+                isBeef = it.isBeef,
+                isBreakfast = it.isBreakfast,
+                isChicken = it.isChicken,
+                isDessert = it.isDessert,
+                isGoat = it.isGoat,
+                isLamb = it.isLamb,
+                isMiscellaneous = it.isMiscellaneous,
+                isPasta = it.isPasta,
+                isPork = it.isPork,
+                isSeafood = it.isSeafood,
+                isSide = it.isSide,
+                isStarter = it.isStarter,
+                isVegan = it.isVegan,
+                isVegetarian = it.isVegetarian
+            )
+            out.add(list)
+        }
+        return out
+    }
+
+    fun entityStarterToDomainStarter(input: List<EntityCategoryMeal>): List<DomainMeal> =
+        input.map {
+            DomainMeal(
+                isStarter =it.isStarter,
+                isVegan =it.isVegan,
+                isSide =it.isSide,
+                isSeafood =it.isSeafood,
+                isPork =it.isPork,
+                isPasta =it.isPasta,
+                isMiscellaneous =it.isMiscellaneous,
+                isLamb =it.isLamb,
+                isGoat =it.isGoat,
+                isDessert =it.isDessert,
+                isChicken =it.isChicken,
+                isBreakfast =it.isBreakfast,
+                isBeef =it.isBeef,
+                strMealThumb =it.strMealThumb,
+                strMeal =it.strMeal,
+                idMeal =it.idMeal,
+                isVegetarian =it.isVegetarian
+            )
+        }
 }

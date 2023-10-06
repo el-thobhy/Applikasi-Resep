@@ -19,27 +19,7 @@ class AreaActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding= ActivityAreaBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        getData()
 
     }
 
-    private fun getData() {
-        areaViewModel.getArea().observe(this){
-            if(it.data?.isNotEmpty()==true){
-                when(it.status){
-                    Status.LOADING -> {
-
-                    }
-                    Status.SUCCESS -> {
-                        binding.tv.text = it.data.toString()
-                        Log.e("tes", "getData: ${it.data.toString()}" )
-                    }
-                    Status.ERROR -> {
-
-                    }
-                }
-            }
-            else Log.e("error ka", "getData: ${it.message}" )
-        }
-    }
 }

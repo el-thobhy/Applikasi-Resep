@@ -16,9 +16,11 @@ abstract class NetworkBoundResource<ResultType, RequestType> {
                     saveCallResult(apiResponse.data)
                     Log.e("Check", ": ${apiResponse.data}" )
                     emitAll(loadFromDB().map {
+                        Log.e("itttt", ":$it " )
                         Resource.success(
                             it
                         )
+
                     })
                 }
                 is ApiResponse.Empty -> {

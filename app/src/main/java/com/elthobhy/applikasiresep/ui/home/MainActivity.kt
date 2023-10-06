@@ -3,6 +3,8 @@ package com.elthobhy.applikasiresep.ui.home
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Parcelable
+import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityOptionsCompat
@@ -10,14 +12,19 @@ import androidx.core.util.Pair
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.elthobhy.applikasiresep.R
+import com.elthobhy.applikasiresep.core.domain.model.DomainCategory
 import com.elthobhy.applikasiresep.core.domain.model.DomainMain
 import com.elthobhy.applikasiresep.core.utils.Constants
 import com.elthobhy.applikasiresep.core.utils.Status
 import com.elthobhy.applikasiresep.databinding.ActivityMainBinding
 import com.elthobhy.applikasiresep.databinding.LayoutDialogBinding
 import com.elthobhy.applikasiresep.ui.detail.DetailActivity
+import com.elthobhy.applikasiresep.ui.detail.detailcatagory.DetailCategoryActivity
 import com.elthobhy.applikasiresep.ui.search.SearchActivity
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.FlowPreview
 import org.koin.android.ext.android.inject
+import java.util.ArrayList
 
 class MainActivity : AppCompatActivity() {
 
@@ -36,6 +43,7 @@ class MainActivity : AppCompatActivity() {
         getData()
     }
 
+    @OptIn(FlowPreview::class, ExperimentalCoroutinesApi::class)
     private fun onCLick() {
         binding.searchView.setOnClickListener {
             val optionsCompat: ActivityOptionsCompat =
@@ -70,6 +78,17 @@ class MainActivity : AppCompatActivity() {
             setHasFixedSize(true)
             adapter = adapterCategory
         }
+        adapterCategory.setOnClickCallback(object : AdapterCategory.OnItemClickCallback{
+            override fun onClicked(data: DomainCategory) {
+                goToDetailCategory(data)
+            }
+        })
+    }
+
+    private fun goToDetailCategory(data: DomainCategory) {
+        val intent = Intent(this,DetailCategoryActivity::class.java)
+        intent.putExtra(Constants.DATA_CATEGORY, data)
+        startActivity(intent)
     }
 
     private fun getDataCategory() {

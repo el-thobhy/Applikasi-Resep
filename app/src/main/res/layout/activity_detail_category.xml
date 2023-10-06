@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:fitsSystemWindows="true"
+    tools:context=".ui.home.MainActivity">
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        app:elevation="0dp"
+        android:fitsSystemWindows="true"
+        style="@style/Background"
+        android:layout_height="wrap_content">
+        <com.google.android.material.appbar.CollapsingToolbarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fitsSystemWindows="true"
+            app:contentScrim="?attr/colorPrimary"
+            app:layout_scrollFlags="scroll|enterAlwaysCollapsed"
+            app:toolbarId="@+id/toolbar">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/tv_top"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <androidx.appcompat.widget.Toolbar
+                    android:id="@+id/toolbar"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:layout_width="match_parent"
+                    android:paddingTop="16dp"
+                    android:layout_height="?attr/actionBarSize"/>
+                <ImageView
+                    android:id="@+id/iv_detail_category"
+                    app:layout_constraintTop_toBottomOf="@id/toolbar"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:contentDescription="@string/image_category"
+                    android:layout_width="match_parent"
+                    tools:src="@tools:sample/avatars"
+                    android:layout_height="wrap_content"/>
+                <TextView
+                    android:id="@+id/meal_category"
+                    app:layout_constraintStart_toStartOf="@id/iv_detail_category"
+                    app:layout_constraintEnd_toEndOf="@id/iv_detail_category"
+                    app:layout_constraintTop_toBottomOf="@id/iv_detail_category"
+                    android:text="@string/meal_name"
+                    android:fontFamily="@font/poppins_bold"
+                    android:textStyle="bold"
+                    android:textSize="16sp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"/>
+                <TextView
+                    android:id="@+id/tv_description"
+                    app:layout_constraintTop_toBottomOf="@id/meal_category"
+                    app:layout_constraintStart_toStartOf="@id/meal_category"
+                    app:layout_constraintEnd_toEndOf="@id/meal_category"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:fontFamily="@font/poppins_light"
+                    android:textColor="@android:color/darker_gray"
+                    android:textSize="12sp"
+                    android:text="@string/lorem_impus"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </com.google.android.material.appbar.CollapsingToolbarLayout>
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout"
+        style="@style/Background"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+
+        <TextView
+            android:id="@+id/tv_title_category"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginBottom="16dp"
+            android:fontFamily="@font/poppins_bold"
+            android:paddingTop="16dp"
+            android:text="@string/meal_category"
+            android:textAlignment="textStart"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toTopOf="@id/rv_category_meal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_category_meal"
+            style="@style/Background"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_title_category"
+            tools:listitem="@layout/item_main" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
