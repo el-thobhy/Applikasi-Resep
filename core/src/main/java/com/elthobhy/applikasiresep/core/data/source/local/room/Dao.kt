@@ -31,6 +31,10 @@ interface Dao {
     @Query("SELECT * FROM table_search WHERE strMeal LIKE '%' || :name || '%'")
     fun getSearch(name: String): Flow<List<EntitySearch>>
 
+    @Query("SELECT * FROM list")
+    fun getArea(): Flow<List<Entity>>
+
+
 
     @Query("SELECT * FROM tabel_category_meal WHERE isStarter = 1")
     fun getStarter(): Flow<List<EntityCategoryMeal>>
@@ -89,6 +93,10 @@ interface Dao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertDetail(entityDetail: List<EntityDetail>)
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertArea(entity: List<Entity>)
+
 
     @Update
     fun updateStatusStarter(data: List<EntityCategoryMeal>)

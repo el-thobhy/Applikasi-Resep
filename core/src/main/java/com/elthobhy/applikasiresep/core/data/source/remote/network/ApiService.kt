@@ -31,4 +31,9 @@ interface ApiService {
 
     @GET("categories.php")
     suspend fun getCategory(): ResponseCategory
+
+    @GET("list.php")
+    suspend fun getArea(
+        @Query("a") a: String
+    ): Response
 }

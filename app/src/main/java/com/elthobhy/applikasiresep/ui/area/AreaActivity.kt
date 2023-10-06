@@ -20,6 +20,7 @@ class AreaActivity : AppCompatActivity() {
         binding= ActivityAreaBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+
     }
 
 }

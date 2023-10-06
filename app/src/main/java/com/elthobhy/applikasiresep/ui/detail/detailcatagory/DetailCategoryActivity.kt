@@ -1,9 +1,9 @@
 package com.elthobhy.applikasiresep.ui.detail.detailcatagory
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.elthobhy.applikasiresep.core.domain.model.DomainCategory
@@ -12,7 +12,6 @@ import com.elthobhy.applikasiresep.core.utils.Constants
 import com.elthobhy.applikasiresep.core.utils.Status
 import com.elthobhy.applikasiresep.databinding.ActivityDetailCategoryBinding
 import com.elthobhy.applikasiresep.ui.detail.DetailActivity
-import com.elthobhy.applikasiresep.ui.mealcategory.MealActivity
 import org.koin.android.ext.android.inject
 
 class DetailCategoryActivity : AppCompatActivity() {

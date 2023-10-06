@@ -1,6 +1,7 @@
 package com.elthobhy.applikasiresep.core.domain.usecase
 
 import com.elthobhy.applikasiresep.core.data.source.Resource
+import com.elthobhy.applikasiresep.core.domain.model.Domain
 import com.elthobhy.applikasiresep.core.domain.model.DomainCategory
 import com.elthobhy.applikasiresep.core.domain.model.DomainDetail
 import com.elthobhy.applikasiresep.core.domain.model.DomainMain
@@ -30,4 +31,5 @@ interface UseCase {
     fun getDetail(id: String): Flow<Resource<List<DomainDetail>>>
     fun getSearch(name: String): Flow<Resource<List<DomainSearch>>>
     fun getCategory(): Flow<Resource<List<DomainCategory>>>
+    fun getArea(): Flow<Resource<List<Domain>>>
 }

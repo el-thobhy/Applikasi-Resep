@@ -16,9 +16,6 @@
         android:theme="@style/Theme.ApplikasiResep"
         tools:targetApi="31">
         <activity
-            android:name=".ui.mealcategory.MealActivity"
-            android:exported="false" />
-        <activity
             android:name=".ui.detail.detailcatagory.DetailCategoryActivity"
             android:exported="false" />
         <activity

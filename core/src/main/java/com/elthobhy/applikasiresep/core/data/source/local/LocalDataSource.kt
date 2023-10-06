@@ -1,6 +1,7 @@
 package com.elthobhy.applikasiresep.core.data.source.local
 
 import android.util.Log
+import com.elthobhy.applikasiresep.core.data.source.local.entity.Entity
 import com.elthobhy.applikasiresep.core.data.source.local.entity.EntityCategory
 import com.elthobhy.applikasiresep.core.data.source.local.entity.EntityCategoryMeal
 import com.elthobhy.applikasiresep.core.data.source.local.entity.EntityDetail
@@ -30,12 +31,14 @@ class LocalDataSource(private val dao: Dao) {
     fun getCategory(): Flow<List<EntityCategory>> = dao.getCategory()
     fun getDetail(id: String): Flow<List<EntityDetail>> = dao.getDetail(id)
     fun getSearch(name: String): Flow<List<EntitySearch>> = dao.getSearch(name)
+    fun getArea(): Flow<List<Entity>> = dao.getArea()
 
     suspend fun insertCategory(entityCategory: List<EntityCategory>) = dao.insertCategory(entityCategory)
     suspend fun insertSearch(entitySearch: List<EntitySearch>) = dao.insertSearch(entitySearch)
     suspend fun insertDetail(entityDetail: List<EntityDetail>) = dao.insertDetail(entityDetail)
     suspend fun insertMain(entityMain: List<EntityMain>) = dao.insertMain(entityMain)
     suspend fun insert(entity: List<EntityCategoryMeal>) = dao.insert(entity)
+    suspend fun insertArea(entity: List<Entity>) = dao.insertArea(entity)
 /*    fun setStatus(data: List<EntityCategoryMeal>, status: Boolean, cat: String) {
         when (cat) {
             "Starter" -> {

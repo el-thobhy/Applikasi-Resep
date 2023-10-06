@@ -6,6 +6,7 @@ import com.elthobhy.applikasiresep.core.domain.usecase.UseCase
 import com.elthobhy.applikasiresep.ui.detail.DetailViewModel
 import com.elthobhy.applikasiresep.ui.detail.detailcatagory.DetailCategoryMealAdapter
 import com.elthobhy.applikasiresep.ui.detail.detailcatagory.DetailCategoryViewModel
+import com.elthobhy.applikasiresep.ui.home.AdapterArea
 import com.elthobhy.applikasiresep.ui.home.AdapterCategory
 import com.elthobhy.applikasiresep.ui.home.AdapterMain
 import com.elthobhy.applikasiresep.ui.home.HomeViewModel
@@ -33,4 +34,5 @@ val adapter = module {
     single { AdapterSearch() }
     single { AdapterCategory() }
     single { DetailCategoryMealAdapter() }
+    single { AdapterArea() }
 }

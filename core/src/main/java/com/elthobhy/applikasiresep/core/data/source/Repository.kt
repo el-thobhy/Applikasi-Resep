@@ -5,9 +5,12 @@ import com.elthobhy.applikasiresep.core.data.source.local.LocalDataSource
 import com.elthobhy.applikasiresep.core.data.source.remote.RemoteDataSource
 import com.elthobhy.applikasiresep.core.data.source.remote.network.ApiResponse
 import com.elthobhy.applikasiresep.core.data.source.remote.response.CategoriesItem
+import com.elthobhy.applikasiresep.core.data.source.remote.response.MealsItem
 import com.elthobhy.applikasiresep.core.data.source.remote.response.MealsItemDetail
 import com.elthobhy.applikasiresep.core.data.source.remote.response.MealsItemMain
 import com.elthobhy.applikasiresep.core.data.source.remote.response.MealsItemSearch
+import com.elthobhy.applikasiresep.core.data.source.remote.response.Response
+import com.elthobhy.applikasiresep.core.domain.model.Domain
 import com.elthobhy.applikasiresep.core.domain.model.DomainCategory
 import com.elthobhy.applikasiresep.core.domain.model.DomainDetail
 import com.elthobhy.applikasiresep.core.domain.model.DomainMain
@@ -167,6 +170,26 @@ class Repository(
             }
 
             override fun shouldFetch(data: List<DomainCategory>?): Boolean {
+                return data == null || data.isEmpty()
+            }
+        }.asFlow()
+
+    override fun getArea(): Flow<Resource<List<Domain>>> =
+        object : NetworkBoundResource<List<Domain>, List<MealsItem>>(){
+            override fun loadFromDB(): Flow<List<Domain>> {
+                return local.getArea().map { DataMapper.entityToDomain(it) }
+            }
+
+            override suspend fun createCall(): Flow<ApiResponse<List<MealsItem>>> {
+                return remote.getArea()
+            }
+
+            override suspend fun saveCallResult(data: List<MealsItem>) {
+                val dataMap = DataMapper.responToEntity(data)
+                return local.insertArea(dataMap)
+            }
+
+            override fun shouldFetch(data: List<Domain>?): Boolean {
                 return data == null || data.isEmpty()
             }
         }.asFlow()

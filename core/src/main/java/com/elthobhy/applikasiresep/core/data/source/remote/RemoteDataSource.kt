@@ -101,4 +101,22 @@ class RemoteDataSource {
             }
         }.flowOn(Dispatchers.IO)
     }
+
+    suspend fun getArea() : Flow<ApiResponse<List<MealsItem>>> {
+        return flow {
+            try {
+                val response = ApiConfig.getApiService().getArea("list")
+                val list = response.meals
+                if(list.isNotEmpty()){
+                    emit(ApiResponse.Success(list))
+                    Log.e("response", "getArea: $list" )
+                }else{
+                    emit(ApiResponse.Empty)
+                    Log.e("response kosong", "GetArea: $list" )
+                }
+            } catch (e: Exception) {
+                emit(ApiResponse.Error(e.message.toString()))
+            }
+        }.flowOn(Dispatchers.IO)
+    }
 }
