@@ -9,7 +9,6 @@ import com.elthobhy.applikasiresep.core.data.source.remote.response.MealsItem
 import com.elthobhy.applikasiresep.core.data.source.remote.response.MealsItemDetail
 import com.elthobhy.applikasiresep.core.data.source.remote.response.MealsItemMain
 import com.elthobhy.applikasiresep.core.data.source.remote.response.MealsItemSearch
-import com.elthobhy.applikasiresep.core.data.source.remote.response.Response
 import com.elthobhy.applikasiresep.core.domain.model.Domain
 import com.elthobhy.applikasiresep.core.domain.model.DomainCategory
 import com.elthobhy.applikasiresep.core.domain.model.DomainDetail
@@ -193,6 +192,40 @@ class Repository(
                 return data == null || data.isEmpty()
             }
         }.asFlow()
+
+    override fun getAreaList(strArea: String): Flow<Resource<List<DomainMain>>> =
+        object : NetworkBoundResource<List<DomainMain>, List<MealsItemMain>>(){
+            override fun loadFromDB(): Flow<List<DomainMain>> {
+                return local.getAreaList().map { DataMapper.entityMainToDomainMain(it) }
+            }
+
+            override suspend fun createCall(): Flow<ApiResponse<List<MealsItemMain>>> {
+                return remote.getAreaList(strArea)
+            }
+
+            override suspend fun saveCallResult(data: List<MealsItemMain>) {
+                val dataMap = DataMapper.responMainToEntityMain(data)
+                return local.insertAreaList(dataMap)
+            }
+
+            override fun shouldFetch(data: List<DomainMain>?): Boolean {
+                return data == null || data.isEmpty()
+            }
+        }.asFlow()
+
+    override fun setFav(status: Boolean, data: DomainDetail) {
+        val entity = DataMapper.domainToEntity(data)
+        appExecutors.diskIO().execute{
+            entity?.let { local.setFavorite(status, it) }
+            Log.e("cihuy", "setFav: $entity" )
+        }
+    }
+
+    override fun getFav(): Flow<List<DomainDetail>> =
+        local.getFav().map {
+            DataMapper.entityDetailToDomainDetail(it)
+        }
+
 
 
 }

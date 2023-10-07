@@ -1,11 +1,13 @@
 package com.elthobhy.applikasiresep.di
 
-import com.elthobhy.applikasiresep.ui.area.AreaViewModel
 import com.elthobhy.applikasiresep.core.domain.usecase.RepositoryInteract
 import com.elthobhy.applikasiresep.core.domain.usecase.UseCase
+import com.elthobhy.applikasiresep.ui.area.AreaViewModel
 import com.elthobhy.applikasiresep.ui.detail.DetailViewModel
 import com.elthobhy.applikasiresep.ui.detail.detailcatagory.DetailCategoryMealAdapter
 import com.elthobhy.applikasiresep.ui.detail.detailcatagory.DetailCategoryViewModel
+import com.elthobhy.applikasiresep.ui.favorite.AdapterFav
+import com.elthobhy.applikasiresep.ui.favorite.FavoriteViewModel
 import com.elthobhy.applikasiresep.ui.home.AdapterArea
 import com.elthobhy.applikasiresep.ui.home.AdapterCategory
 import com.elthobhy.applikasiresep.ui.home.AdapterMain
@@ -28,6 +30,7 @@ val viewModel = module {
     single { DetailViewModel(get()) }
     single { SearchViewModel(get()) }
     single { DetailCategoryViewModel(get()) }
+    single { FavoriteViewModel(get()) }
 }
 val adapter = module {
     single { AdapterMain() }
@@ -35,4 +38,5 @@ val adapter = module {
     single { AdapterCategory() }
     single { DetailCategoryMealAdapter() }
     single { AdapterArea() }
+    single { AdapterFav() }
 }

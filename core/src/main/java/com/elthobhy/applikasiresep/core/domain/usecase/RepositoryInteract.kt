@@ -50,6 +50,14 @@ class RepositoryInteract(private val repo: RepositoryInterface) : UseCase {
     override fun getSearch(name: String): Flow<Resource<List<DomainSearch>>> = repo.getSearch(name)
     override fun getCategory(): Flow<Resource<List<DomainCategory>>> = repo.getCategory()
     override fun getArea(): Flow<Resource<List<Domain>>> = repo.getArea()
+    override fun getAreaList(strArea: String): Flow<Resource<List<DomainMain>>> = repo.getAreaList(strArea)
+    override fun setFav(state: Boolean, data: DomainDetail) {
+        repo.setFav(state,data)
+    }
+
+    override fun getFav(): Flow<List<DomainDetail>> {
+        return repo.getFav()
+    }
 
 
 }

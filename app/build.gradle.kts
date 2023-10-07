@@ -40,7 +40,6 @@ android {
     buildFeatures {
         viewBinding = true
     }
-    dynamicFeatures += setOf(":bookmark")
 }
 
 dependencies {

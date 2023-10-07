@@ -71,18 +71,19 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toStartOf="@id/card_1"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginBottom="16dp"
+                    android:layout_margin="10dp"
                     app:cardCornerRadius="16dp"
-                    android:layout_width="140dp"
-                    android:layout_height="100dp">
+                    android:layout_width="100dp"
+                    android:layout_height="110dp">
+
                     <TextView
                         android:id="@+id/tv_jenis_makanan"
-                        android:padding="16dp"
-                        android:gravity="center"
-                        android:text="@string/meal_category"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:padding="16dp"
+                        android:textSize="12sp"
+                        android:text="@string/meal_category"
                         app:drawableTopCompat="@drawable/icon_custom" />
                 </androidx.cardview.widget.CardView>
                 <androidx.cardview.widget.CardView
@@ -90,18 +91,39 @@
                     app:layout_constraintTop_toTopOf="@id/card"
                     app:layout_constraintBottom_toBottomOf="@id/card"
                     app:layout_constraintStart_toEndOf="@id/card"
-                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/card_2"
                     app:cardCornerRadius="16dp"
-                    android:layout_width="140dp"
-                    android:layout_height="100dp">
+                    android:layout_width="100dp"
+                    android:layout_height="110dp">
                     <TextView
                         android:id="@+id/tv_negara"
                         android:padding="16dp"
                         android:gravity="center"
                         android:text="@string/area"
+                        android:textSize="12sp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         app:drawableTopCompat="@drawable/icon_custom_copy" />
+                </androidx.cardview.widget.CardView>
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/card_2"
+                    app:layout_constraintTop_toTopOf="@id/card"
+                    app:layout_constraintBottom_toBottomOf="@id/card"
+                    app:layout_constraintStart_toEndOf="@id/card_1"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:cardCornerRadius="16dp"
+                    android:layout_margin="10dp"
+                    android:layout_width="100dp"
+                    android:layout_height="110dp">
+                    <TextView
+                        android:id="@+id/tv_bookmark"
+                        android:padding="16dp"
+                        android:gravity="center"
+                        android:textSize="12sp"
+                        android:text="@string/bookmark"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:drawableTopCompat="@drawable/icon_custom_copy2" />
                 </androidx.cardview.widget.CardView>
 
 

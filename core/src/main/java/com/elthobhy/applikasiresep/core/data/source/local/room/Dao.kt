@@ -11,13 +11,15 @@ import com.elthobhy.applikasiresep.core.data.source.local.entity.EntityCategoryM
 import com.elthobhy.applikasiresep.core.data.source.local.entity.EntityDetail
 import com.elthobhy.applikasiresep.core.data.source.local.entity.EntityMain
 import com.elthobhy.applikasiresep.core.data.source.local.entity.EntitySearch
-import com.elthobhy.applikasiresep.core.domain.model.DomainMeal
 import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface Dao {
     @Query("SELECT * FROM tabel_category_meal")
     fun getListCategory(): Flow<List<EntityCategoryMeal>>
+
+    @Query("SELECT * FROM tabel_popular")
+    fun getAreaList(): Flow<List<EntityMain>>
 
     @Query("SELECT * FROM tabel_popular")
     fun getPopular(): Flow<List<EntityMain>>
@@ -97,9 +99,15 @@ interface Dao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertArea(entity: List<Entity>)
 
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertAreaList(entityArea: List<EntityMain>)
+
+
+    @Query("SELECT * FROM detail_tabel WHERE isFavorite = 1")
+    fun getFav(): Flow<List<EntityDetail>>
 
     @Update
-    fun updateStatusStarter(data: List<EntityCategoryMeal>)
+    fun updateFavorite(data: EntityDetail)
 
 
 }

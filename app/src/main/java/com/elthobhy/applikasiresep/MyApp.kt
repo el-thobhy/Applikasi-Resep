@@ -28,7 +28,7 @@ class MyApp: Application() {
                 database,
                 useCase,
                 viewModel,
-                adapter
+                adapter,
             )
         }
     }

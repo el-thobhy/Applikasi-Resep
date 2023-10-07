@@ -36,4 +36,10 @@ interface ApiService {
     suspend fun getArea(
         @Query("a") a: String
     ): Response
+
+
+    @GET("filter.php")
+    suspend fun getAreaList(
+        @Query("a") a: String
+    ): ResponseListPopular
 }

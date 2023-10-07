@@ -164,5 +164,8 @@ data class EntityDetail (
     val strMeasure14: String? = null,
 
     @ColumnInfo(name = "strMeasure15")
-    val strMeasure15: String? = null
+    val strMeasure15: String? = null,
+
+    @ColumnInfo(name = "isFavorite")
+    var isFavorite: Boolean = false
 )

@@ -6,4 +6,5 @@ object Constants {
     const val DATA_LIST_CATEGORY = "data_list_category"
     const val STATE = "state"
     const val AREA = "area"
+    const val ID_MEAL_AREA = "id_meal_area"
 }

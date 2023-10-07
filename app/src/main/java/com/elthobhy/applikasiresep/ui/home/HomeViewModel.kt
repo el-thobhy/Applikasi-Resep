@@ -7,7 +7,6 @@ import com.elthobhy.applikasiresep.core.data.source.Resource
 import com.elthobhy.applikasiresep.core.domain.model.Domain
 import com.elthobhy.applikasiresep.core.domain.model.DomainCategory
 import com.elthobhy.applikasiresep.core.domain.model.DomainMain
-import com.elthobhy.applikasiresep.core.domain.model.DomainMeal
 import com.elthobhy.applikasiresep.core.domain.usecase.UseCase
 
 class HomeViewModel(private val useCase: UseCase): ViewModel() {

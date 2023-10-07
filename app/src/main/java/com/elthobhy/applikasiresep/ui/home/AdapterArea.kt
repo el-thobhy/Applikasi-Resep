@@ -6,11 +6,9 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
 import com.elthobhy.applikasiresep.R
 import com.elthobhy.applikasiresep.core.domain.model.Domain
 import com.elthobhy.applikasiresep.databinding.ItemAreaBinding
-import com.elthobhy.applikasiresep.databinding.ItemMainBinding
 
 class AdapterArea: ListAdapter<Domain, AdapterArea.AdapterViewHolder>(DIFF_CALLBACK) {
 

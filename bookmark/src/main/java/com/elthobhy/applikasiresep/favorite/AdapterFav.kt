@@ -1,4 +1,4 @@
-package com.elthobhy.applikasiresep.ui.detail.detailcatagory
+package com.elthobhy.applikasiresep.favorite
 
 import android.view.LayoutInflater
 import android.view.View
@@ -8,24 +8,25 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.elthobhy.applikasiresep.R
-import com.elthobhy.applikasiresep.core.domain.model.DomainMeal
-import com.elthobhy.applikasiresep.databinding.ItemMainBinding
+import com.elthobhy.applikasiresep.core.domain.model.DomainDetail
+import com.elthobhy.applikasiresep.core.domain.model.DomainSearch
+import com.elthobhy.applikasiresep.databinding.ItemSearchBinding
+import com.elthobhy.applikasiresep.ui.search.AdapterSearch
 
-class DetailCategoryMealAdapter: ListAdapter<DomainMeal, DetailCategoryMealAdapter.AdapterViewHolder>(DIFF_CALLBACK) {
+class AdapterFav: ListAdapter<DomainDetail, AdapterFav.AdapterViewHolder>(DIFF_CALLBACK) {
 
     private lateinit var onItemClickCallback: OnItemClickCallback
 
     interface OnItemClickCallback {
-        fun onClicked(data: DomainMeal)
+        fun onClicked(data: DomainDetail)
     }
 
-    fun setOnClickCallback(onItemClickCallback: OnItemClickCallback) {
+    fun setOnClickCallback(onItemClickCallback: OnItemClickCallback){
         this.onItemClickCallback = onItemClickCallback
     }
 
-    inner class AdapterViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        fun bind(list: DomainMeal) {
-            val binding = ItemMainBinding.bind(itemView)
+    inner class AdapterViewHolder(private val binding: ItemSearchBinding): RecyclerView.ViewHolder(binding.root) {
+        fun bind(list: DomainDetail){
             binding.apply {
                 Glide.with(itemView)
                     .load(list.strMealThumb)
@@ -40,8 +41,7 @@ class DetailCategoryMealAdapter: ListAdapter<DomainMeal, DetailCategoryMealAdapt
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AdapterViewHolder {
-        val view =
-            LayoutInflater.from(parent.context).inflate(R.layout.item_main, parent, false)
+        val view = ItemSearchBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return AdapterViewHolder(view)
     }
 
@@ -50,12 +50,12 @@ class DetailCategoryMealAdapter: ListAdapter<DomainMeal, DetailCategoryMealAdapt
     }
 
     companion object {
-        val DIFF_CALLBACK = object : DiffUtil.ItemCallback<DomainMeal>() {
-            override fun areItemsTheSame(oldItem: DomainMeal, newItem: DomainMeal): Boolean {
-                return oldItem.strMeal == newItem.strMeal
+        val DIFF_CALLBACK = object : DiffUtil.ItemCallback<DomainDetail>(){
+            override fun areItemsTheSame(oldItem: DomainDetail, newItem: DomainDetail): Boolean {
+                return oldItem.idMeal == newItem.idMeal
             }
 
-            override fun areContentsTheSame(oldItem: DomainMeal, newItem: DomainMeal): Boolean {
+            override fun areContentsTheSame(oldItem: DomainDetail, newItem: DomainDetail): Boolean {
                 return oldItem == newItem
             }
 

@@ -57,5 +57,6 @@ data class DomainDetail(
     val strMeasure16: String? = null,
     val strMeasure17: String? = null,
     val strMeasure14: String? = null,
-    val strMeasure15: String? = null
+    val strMeasure15: String? = null,
+    var isFavorite: Boolean = false
 ): Parcelable

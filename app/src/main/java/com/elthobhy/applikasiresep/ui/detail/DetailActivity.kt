@@ -1,11 +1,12 @@
 package com.elthobhy.applikasiresep.ui.detail
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
 import com.elthobhy.applikasiresep.R
+import com.elthobhy.applikasiresep.core.domain.model.DomainDetail
 import com.elthobhy.applikasiresep.core.utils.Constants
 import com.elthobhy.applikasiresep.core.utils.Status
 import com.elthobhy.applikasiresep.databinding.ActivityDetailBinding
@@ -25,6 +26,8 @@ class DetailActivity : AppCompatActivity() {
         binding = ActivityDetailBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        getFav()
+
         actionBar()
         showDetail()
     }
@@ -32,6 +35,7 @@ class DetailActivity : AppCompatActivity() {
     private fun showDetail() {
         val intent1 = intent.getStringExtra(Constants.ID_MEAL)
         val intent2 = intent.getStringExtra(Constants.DATA_CATEGORY)
+        val intent3 = intent.getStringExtra(Constants.ID_MEAL_AREA)
         Log.e("TAG", "showDetail: $intent2" )
         Log.e("TAG2", "showDetail: $intent1" )
         if (intent1 != null) {
@@ -40,6 +44,7 @@ class DetailActivity : AppCompatActivity() {
         if(intent2 !=null){
             getData(intent2)
         }
+        if(intent3 !=null) getData(intent3)
     }
 
     private fun getData(intent: String) {
@@ -47,6 +52,7 @@ class DetailActivity : AppCompatActivity() {
             when (it.status) {
                 Status.LOADING -> {}
                 Status.SUCCESS -> {
+                    it.data?.get(0)?.let { it1 -> setActionBookmark(it1) }
                     binding.apply {
                         it.data?.get(0)?.apply {
                             Glide.with(this@DetailActivity)
@@ -135,6 +141,8 @@ class DetailActivity : AppCompatActivity() {
                         }
 
                     }
+
+                    it.data?.get(0)?.let { it1 -> setFavoriteState(it1.isFavorite) }
                     Log.e("yuyup", "showDetail: ${it.data?.get(0)?.strYoutube}")
                 }
 
@@ -142,6 +150,36 @@ class DetailActivity : AppCompatActivity() {
                     Log.e("TAGi", "getData: ${it.message}" )
                 }
             }
+
+        }
+    }
+
+    private fun setActionBookmark(get: DomainDetail) {
+        binding.fabFavorite.setOnClickListener {
+            if (!get.isFavorite) {
+                Toast.makeText(this, getString(R.string.added_to_bookmark), Toast.LENGTH_SHORT)
+                    .show()
+            } else {
+                Toast.makeText(this, getString(R.string.remove_from_bookmark), Toast.LENGTH_SHORT)
+                    .show()
+            }
+            detailViewModel.setFav(get)
+            Log.e("fav", "setActionBookmark: ${ get.isFavorite }")
+        }
+    }
+
+
+    private fun setFavoriteState(favorite: Boolean) {
+        if (favorite) {
+            binding.fabFavorite.setImageResource(R.drawable.ic_baseline_bookmark_24)
+        } else {
+            binding.fabFavorite.setImageResource(R.drawable.ic_baseline_bookmark_border_24)
+        }
+    }
+
+    private fun getFav(){
+        detailViewModel.getFav().observe(this){
+
         }
     }
 
@@ -153,4 +191,5 @@ class DetailActivity : AppCompatActivity() {
             finish()
         }
     }
+
 }

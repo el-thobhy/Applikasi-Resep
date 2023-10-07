@@ -1,11 +1,11 @@
 package com.elthobhy.applikasiresep.ui.home
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityOptionsCompat
 import androidx.core.util.Pair
 import androidx.recyclerview.widget.GridLayoutManager
@@ -22,6 +22,7 @@ import com.elthobhy.applikasiresep.databinding.LayoutDialogBinding
 import com.elthobhy.applikasiresep.ui.area.AreaActivity
 import com.elthobhy.applikasiresep.ui.detail.DetailActivity
 import com.elthobhy.applikasiresep.ui.detail.detailcatagory.DetailCategoryActivity
+import com.elthobhy.applikasiresep.ui.favorite.FavoriteActivity
 import com.elthobhy.applikasiresep.ui.search.SearchActivity
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
@@ -59,6 +60,10 @@ class MainActivity : AppCompatActivity() {
             )
         }
         binding.apply {
+            card2.setOnClickListener {
+                val intent = Intent(this@MainActivity, FavoriteActivity::class.java)
+                startActivity(intent)
+            }
             card1.setOnClickListener {
                 showDialogArea()
             }

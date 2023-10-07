@@ -32,4 +32,7 @@ interface UseCase {
     fun getSearch(name: String): Flow<Resource<List<DomainSearch>>>
     fun getCategory(): Flow<Resource<List<DomainCategory>>>
     fun getArea(): Flow<Resource<List<Domain>>>
+    fun getAreaList(strArea: String): Flow<Resource<List<DomainMain>>>
+    fun setFav(state: Boolean, data: DomainDetail)
+    fun getFav(): Flow<List<DomainDetail>>
 }

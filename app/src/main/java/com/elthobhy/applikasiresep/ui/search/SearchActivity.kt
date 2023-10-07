@@ -1,21 +1,18 @@
 package com.elthobhy.applikasiresep.ui.search
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
 import androidx.lifecycle.Observer
-import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.elthobhy.applikasiresep.R
 import com.elthobhy.applikasiresep.core.data.source.Resource
 import com.elthobhy.applikasiresep.core.domain.model.DomainSearch
 import com.elthobhy.applikasiresep.core.utils.Constants
 import com.elthobhy.applikasiresep.core.utils.Status
 import com.elthobhy.applikasiresep.databinding.ActivitySearchBinding
 import com.elthobhy.applikasiresep.ui.detail.DetailActivity
-import com.elthobhy.applikasiresep.ui.home.AdapterMain
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
 import org.koin.android.ext.android.inject
