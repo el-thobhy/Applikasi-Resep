@@ -56,7 +56,7 @@ class AreaActivity : AppCompatActivity() {
     private fun showRv() {
         with(binding.rvArea) {
             layoutManager =
-                LinearLayoutManager(this@AreaActivity, androidx.recyclerview.widget.LinearLayoutManager.VERTICAL, false)
+                LinearLayoutManager(this@AreaActivity, LinearLayoutManager.VERTICAL, false)
             setHasFixedSize(true)
             adapter = adapterMain
         }
