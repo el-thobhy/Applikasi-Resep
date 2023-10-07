@@ -16,4 +16,3 @@ dependencyResolutionManagement {
 rootProject.name = "Applikasi Resep"
 include(":app")
 include(":core")
-include(":bookmark")

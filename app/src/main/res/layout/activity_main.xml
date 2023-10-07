@@ -1,18 +1,208 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:fitsSystemWindows="true"
+    tools:context=".ui.home.MainActivity">
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        app:elevation="0dp"
+        android:fitsSystemWindows="true"
+        style="@style/Background"
+        android:layout_height="wrap_content">
+        <com.google.android.material.appbar.CollapsingToolbarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fitsSystemWindows="true"
+            app:contentScrim="?attr/colorPrimary"
+            app:layout_scrollFlags="scroll|enterAlwaysCollapsed"
+            app:toolbarId="@+id/toolbar">
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/tv_top"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+                <androidx.appcompat.widget.Toolbar
+                    android:id="@+id/toolbar"
+                    app:layout_constraintTop_toBottomOf="@id/tv_welcome"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:layout_width="match_parent"
+                    android:paddingTop="16dp"
+                    android:layout_height="?attr/actionBarSize"/>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+                <TextView
+                    android:id="@+id/tv_welcome"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toTopOf="@id/search_view"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginStart="32dp"
+                    android:layout_marginBottom="16dp"
+                    android:textSize="24sp"
+                    android:text="@string/welcome_to_app_recipe"
+                    android:textStyle="bold"
+                    android:fontFamily="@font/poppins_bold"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+                <TextView
+                    android:id="@+id/search_view"
+                    android:background="@drawable/item_bg"
+                    app:layout_constraintTop_toBottomOf="@id/tv_welcome"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginStart="16dp"
+                    app:drawableStartCompat="@drawable/baseline_travel_explore_24"
+                    android:layout_marginEnd="16dp"
+                    android:transitionName="@string/search_transition"
+                    android:layout_height="?attr/actionBarSize"
+                    android:hint="@string/search_by_name"
+                    android:gravity="center"
+                    android:paddingStart="16dp"
+                    android:paddingEnd="16dp"
+                    android:textColor="@color/black"
+                    android:textColorHint="@android:color/darker_gray" />
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/card"
+                    app:layout_constraintTop_toBottomOf="@id/search_view"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/card_1"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:layout_margin="10dp"
+                    app:cardCornerRadius="16dp"
+                    android:layout_width="100dp"
+                    android:layout_height="110dp">
+
+                    <TextView
+                        android:id="@+id/tv_jenis_makanan"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:padding="16dp"
+                        android:textSize="12sp"
+                        android:text="@string/meal_category"
+                        app:drawableTopCompat="@drawable/icon_custom" />
+                </androidx.cardview.widget.CardView>
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/card_1"
+                    app:layout_constraintTop_toTopOf="@id/card"
+                    app:layout_constraintBottom_toBottomOf="@id/card"
+                    app:layout_constraintStart_toEndOf="@id/card"
+                    app:layout_constraintEnd_toStartOf="@+id/card_2"
+                    app:cardCornerRadius="16dp"
+                    android:layout_width="100dp"
+                    android:layout_height="110dp">
+                    <TextView
+                        android:id="@+id/tv_negara"
+                        android:padding="16dp"
+                        android:gravity="center"
+                        android:text="@string/area"
+                        android:textSize="12sp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:drawableTopCompat="@drawable/icon_custom_copy" />
+                </androidx.cardview.widget.CardView>
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/card_2"
+                    app:layout_constraintTop_toTopOf="@id/card"
+                    app:layout_constraintBottom_toBottomOf="@id/card"
+                    app:layout_constraintStart_toEndOf="@id/card_1"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:cardCornerRadius="16dp"
+                    android:layout_margin="10dp"
+                    android:layout_width="100dp"
+                    android:layout_height="110dp">
+                    <TextView
+                        android:id="@+id/tv_bookmark"
+                        android:padding="16dp"
+                        android:gravity="center"
+                        android:textSize="12sp"
+                        android:text="@string/bookmark"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:drawableTopCompat="@drawable/icon_custom_copy2" />
+                </androidx.cardview.widget.CardView>
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </com.google.android.material.appbar.CollapsingToolbarLayout>
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout"
+        style="@style/Background"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <TextView
+            android:id="@+id/tv_recent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginBottom="16dp"
+            android:fontFamily="@font/poppins_bold"
+            android:paddingTop="16dp"
+            android:text="@string/popular_dish"
+            android:textAlignment="textStart"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/lottie"
+            android:layout_width="300dp"
+            android:layout_height="200dp"
+            android:visibility="gone"
+            android:layout_marginTop="100dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_recent"
+            app:lottie_autoPlay="true"
+            app:lottie_fileName="no_data_available.json" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_popular"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_recent"
+            tools:listitem="@layout/item_main" />
+
+        <com.facebook.shimmer.ShimmerFrameLayout
+            android:id="@+id/shimmer_popular_1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            app:layout_constraintEnd_toEndOf="@id/rv_popular"
+            app:layout_constraintStart_toStartOf="@id/rv_popular"
+            app:layout_constraintTop_toBottomOf="@id/tv_recent">
+
+            <include layout="@layout/shimmer_popular" />
+        </com.facebook.shimmer.ShimmerFrameLayout>
+
+        <com.facebook.shimmer.ShimmerFrameLayout
+            android:id="@+id/shimmer_popular_2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/shimmer_popular_1">
+            <include layout="@layout/shimmer_popular" />
+        </com.facebook.shimmer.ShimmerFrameLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
