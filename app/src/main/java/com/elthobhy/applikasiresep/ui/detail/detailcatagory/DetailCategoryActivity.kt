@@ -3,6 +3,7 @@ package com.elthobhy.applikasiresep.ui.detail.detailcatagory
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
@@ -98,13 +99,16 @@ class DetailCategoryActivity : AppCompatActivity() {
             isVegetarian,
         ).observe(this) { list ->
             when (list.status) {
-                Status.LOADING -> {}
+                Status.LOADING -> {
+                    binding.loading.visibility = View.VISIBLE
+                }
                 Status.SUCCESS -> {
+                    binding.loading.visibility = View.GONE
                     adapterCategoryMeal.submitList(list.data)
-                    Log.e("datakuuuu", "getStatus: ${list.data}" )
                 }
 
                 Status.ERROR -> {
+                    binding.loading.visibility = View.GONE
                     Log.e("errrrr", "getStatus: ${list.message}" )
                 }
             }

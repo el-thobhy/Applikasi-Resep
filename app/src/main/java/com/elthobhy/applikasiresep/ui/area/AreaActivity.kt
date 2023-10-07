@@ -3,6 +3,8 @@ package com.elthobhy.applikasiresep.ui.area
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.elthobhy.applikasiresep.core.domain.model.Domain
@@ -34,15 +36,18 @@ class AreaActivity : AppCompatActivity() {
         areaViewModel.getAreaList(data?.strArea.toString()).observe(this){
             when(it.status){
                 Status.LOADING -> {
+                    binding.loading.visibility = View.VISIBLE
                     Log.e("loding", "getDataArea: " )
                 }
                 Status.SUCCESS -> {
+                    binding.loading.visibility = View.GONE
                     adapterMain.submitList(it.data)
                     Log.e("data", "getDataArea: ${it.data}" )
                 }
 
                 Status.ERROR -> {
-                    Log.e("oiiiii", "getDataArea: ${it.message}")
+                    binding.loading.visibility = View.GONE
+                    Toast.makeText(this,"Error: ${it.message}", Toast.LENGTH_LONG).show()
                 }
             }
         }

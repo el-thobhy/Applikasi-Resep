@@ -169,7 +169,6 @@
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_popular"
-            style="@style/Background"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_marginStart="20dp"
@@ -201,7 +200,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/shimmer_popular_1">
-
+            <include layout="@layout/shimmer_popular" />
         </com.facebook.shimmer.ShimmerFrameLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 

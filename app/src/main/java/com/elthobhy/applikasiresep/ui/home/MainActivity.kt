@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityOptionsCompat
@@ -79,24 +80,27 @@ class MainActivity : AppCompatActivity() {
             .setView(dialogBinding.root)
             .setCancelable(true)
         alert.show().window?.decorView?.setBackgroundResource(android.R.color.transparent)
-        getDataArea()
+        getDataArea(dialogBinding)
         showRvArea(dialogBinding)
 
     }
 
-    private fun getDataArea() {
+    private fun getDataArea(dialogBinding: LayoutDialogAreaBinding) {
         homeViewModel.getArea().observe(this) {
             when (it.status) {
                 Status.LOADING -> {
+                    dialogBinding.loading.visibility = View.VISIBLE
                     Log.e("loding", "getDataArea: " )
                 }
                 Status.SUCCESS -> {
+                    dialogBinding.loading.visibility = View.GONE
                     adapterArea.submitList(it.data)
                     Log.e("data", "getDataArea: ${it.data}" )
                 }
 
                 Status.ERROR -> {
-                    Log.e("oiiiii", "getDataArea: ${it.message}")
+                    dialogBinding.loading.visibility = View.GONE
+                    Toast.makeText(this,"Error: ${it.message}", Toast.LENGTH_LONG).show()
                 }
             }
         }
@@ -129,7 +133,7 @@ class MainActivity : AppCompatActivity() {
             .setCancelable(true)
         alert.show().window?.decorView?.setBackgroundResource(android.R.color.transparent)
         showRvDialog(dialogBinding)
-        getDataCategory()
+        getDataCategory(dialogBinding)
 
     }
 
@@ -153,18 +157,23 @@ class MainActivity : AppCompatActivity() {
         startActivity(intent)
     }
 
-    private fun getDataCategory() {
+    private fun getDataCategory(dialogBinding: LayoutDialogBinding) {
         homeViewModel.getCategory().observe(this) {
             when (it.status) {
                 Status.LOADING -> {
+                    dialogBinding.loading.visibility = View.VISIBLE
                     Log.e("loding", "getDataCategory: " )
                 }
                 Status.SUCCESS -> {
+                    dialogBinding.loading.visibility = View.GONE
                     Log.e("loding", "getDataCategory: ${it.data}" )
                     adapterCategory.submitList(it.data)
                 }
 
-                Status.ERROR -> {}
+                Status.ERROR -> {
+                    dialogBinding.loading.visibility = View.GONE
+                    Toast.makeText(this,"Error: ${it.message}", Toast.LENGTH_LONG).show()
+                }
             }
         }
     }

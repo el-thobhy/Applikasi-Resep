@@ -26,4 +26,5 @@
     <string name="bookmark">Bookmark</string>
     <string name="remove_from_bookmark">Remove From Bookmark</string>
     <string name="added_to_bookmark">Added to Bookmark</string>
+    <string name="link_youtube_is_empty">Link youtube is empty</string>
 </resources>

@@ -2,6 +2,8 @@ package com.elthobhy.applikasiresep.ui.favorite
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.elthobhy.applikasiresep.R
@@ -38,6 +40,12 @@ class FavoriteActivity : AppCompatActivity() {
     private fun getData() {
         favoriteViewModel.getFav().observe(this){
             adapterFav.submitList(it)
+            if(it.isNotEmpty()){
+                binding.loading.visibility = View.GONE
+            }else{
+                binding.loading.visibility = View.GONE
+                Toast.makeText(this,"Your Bookmark Empty", Toast.LENGTH_LONG).show()
+            }
         }
     }
 
