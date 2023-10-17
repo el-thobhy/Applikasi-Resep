@@ -9,8 +9,11 @@ import com.elthobhy.applikasiresep.core.data.source.local.entity.EntityMain
 import com.elthobhy.applikasiresep.core.data.source.local.entity.EntitySearch
 import com.elthobhy.applikasiresep.core.data.source.local.room.Dao
 import kotlinx.coroutines.flow.Flow
+import javax.inject.Inject
+import javax.inject.Singleton
 
-class LocalDataSource(private val dao: Dao) {
+@Singleton
+class LocalDataSource @Inject constructor(private val dao: Dao) {
     fun getBeef(): Flow<List<EntityCategoryMeal>> = dao.getBeef()
     fun getBreakfast(): Flow<List<EntityCategoryMeal>> = dao.getBreakfast()
     fun getChicken(): Flow<List<EntityCategoryMeal>> = dao.getChicken()

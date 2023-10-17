@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityOptionsCompat
@@ -25,23 +26,27 @@ import com.elthobhy.applikasiresep.ui.detail.DetailActivity
 import com.elthobhy.applikasiresep.ui.detail.detailcatagory.DetailCategoryActivity
 import com.elthobhy.applikasiresep.ui.favorite.FavoriteActivity
 import com.elthobhy.applikasiresep.ui.search.SearchActivity
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
-import org.koin.android.ext.android.inject
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
-    private val homeViewModel by inject<HomeViewModel>()
-    private val adapterMain by inject<AdapterMain>()
-    private val adapterCategory by inject<AdapterCategory>()
-    private val adapterArea by inject<AdapterArea>()
+    private val homeViewModel: HomeViewModel by viewModels()
+    private lateinit var adapterMain: AdapterMain
+    private lateinit var adapterCategory: AdapterCategory
+    private lateinit var adapterArea: AdapterArea
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        adapterMain = AdapterMain()
+        adapterCategory = AdapterCategory()
+        adapterArea = AdapterArea()
         onCLick()
         showRv()
         getData()

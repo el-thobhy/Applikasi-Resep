@@ -9,8 +9,11 @@ import com.elthobhy.applikasiresep.core.domain.model.DomainMeal
 import com.elthobhy.applikasiresep.core.domain.model.DomainSearch
 import com.elthobhy.applikasiresep.core.domain.repository.RepositoryInterface
 import kotlinx.coroutines.flow.Flow
+import javax.inject.Inject
+import javax.inject.Singleton
 
-class RepositoryInteract(private val repo: RepositoryInterface) : UseCase {
+@Singleton
+class RepositoryInteract @Inject constructor(private val repo: RepositoryInterface) : UseCase {
     override fun getListCategory(
         strCategory: String,
         isBeef: Boolean,

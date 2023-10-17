@@ -1,8 +1,8 @@
 package com.elthobhy.applikasiresep.core.data.source.remote.network
 
+import com.elthobhy.applikasiresep.core.data.source.remote.response.Response
 import com.elthobhy.applikasiresep.core.data.source.remote.response.ResponseCategory
 import com.elthobhy.applikasiresep.core.data.source.remote.response.ResponseDetailMeal
-import com.elthobhy.applikasiresep.core.data.source.remote.response.Response
 import com.elthobhy.applikasiresep.core.data.source.remote.response.ResponseListPopular
 import com.elthobhy.applikasiresep.core.data.source.remote.response.ResponseSearch
 import retrofit2.http.GET

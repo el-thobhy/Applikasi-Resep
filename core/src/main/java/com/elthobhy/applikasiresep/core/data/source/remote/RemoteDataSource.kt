@@ -3,6 +3,7 @@ package com.elthobhy.applikasiresep.core.data.source.remote
 import android.util.Log
 import com.elthobhy.applikasiresep.core.data.source.remote.network.ApiConfig
 import com.elthobhy.applikasiresep.core.data.source.remote.network.ApiResponse
+import com.elthobhy.applikasiresep.core.data.source.remote.network.ApiService
 import com.elthobhy.applikasiresep.core.data.source.remote.response.CategoriesItem
 import com.elthobhy.applikasiresep.core.data.source.remote.response.MealsItem
 import com.elthobhy.applikasiresep.core.data.source.remote.response.MealsItemDetail
@@ -12,12 +13,15 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
+import javax.inject.Inject
+import javax.inject.Singleton
 
-class RemoteDataSource {
+@Singleton
+class RemoteDataSource @Inject constructor(private val apiService: ApiService) {
     suspend fun getListCategory(strCategory: String) : Flow<ApiResponse<List<MealsItemMain>>> {
         return flow {
             try {
-                val response = ApiConfig.getApiService().getListCategory(strCategory)
+                val response = apiService.getListCategory(strCategory)
                 val list = response.meals
                 if(list.isNotEmpty()){
                     emit(ApiResponse.Success(list))

@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
 import androidx.lifecycle.Observer
@@ -14,22 +15,24 @@ import com.elthobhy.applikasiresep.core.utils.Constants
 import com.elthobhy.applikasiresep.core.utils.Status
 import com.elthobhy.applikasiresep.databinding.ActivitySearchBinding
 import com.elthobhy.applikasiresep.ui.detail.DetailActivity
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
-import org.koin.android.ext.android.inject
 
 @FlowPreview
 @ExperimentalCoroutinesApi
+@AndroidEntryPoint
 class SearchActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivitySearchBinding
-    private val searchViewModel by inject<SearchViewModel>()
-    private val adapterSearch by inject<AdapterSearch>()
+    private val searchViewModel: SearchViewModel by viewModels()
+    private lateinit var adapterSearch: AdapterSearch
     private lateinit var searchView: SearchView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding=ActivitySearchBinding.inflate(layoutInflater)
+        adapterSearch = AdapterSearch()
         setContentView(binding.root)
         searchView=binding.search
         searchList()

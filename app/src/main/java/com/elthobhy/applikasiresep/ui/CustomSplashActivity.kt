@@ -2,11 +2,10 @@ package com.elthobhy.applikasiresep.ui
 
 import android.annotation.SuppressLint
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
-import com.elthobhy.applikasiresep.R
+import androidx.appcompat.app.AppCompatActivity
 import com.elthobhy.applikasiresep.core.utils.Constants
 import com.elthobhy.applikasiresep.databinding.ActivityCustomSplashBinding
 import com.elthobhy.applikasiresep.ui.home.MainActivity
