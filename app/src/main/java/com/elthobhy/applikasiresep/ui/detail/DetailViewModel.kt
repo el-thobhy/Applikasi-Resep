@@ -7,8 +7,11 @@ import androidx.lifecycle.asLiveData
 import com.elthobhy.applikasiresep.core.data.source.Resource
 import com.elthobhy.applikasiresep.core.domain.model.DomainDetail
 import com.elthobhy.applikasiresep.core.domain.usecase.UseCase
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 
-class DetailViewModel(private val useCase: UseCase): ViewModel() {
+@HiltViewModel
+class DetailViewModel @Inject constructor(private val useCase: UseCase): ViewModel() {
     fun getDetail(id: String): LiveData<Resource<List<DomainDetail>>> = useCase.getDetail(id).asLiveData()
     fun setFav(model: DomainDetail){
         val newState = !model.isFavorite

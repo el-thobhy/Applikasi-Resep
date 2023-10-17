@@ -20,8 +20,11 @@ import com.elthobhy.applikasiresep.core.utils.AppExecutors
 import com.elthobhy.applikasiresep.core.utils.DataMapper
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
+import javax.inject.Inject
+import javax.inject.Singleton
 
-class Repository(
+@Singleton
+class Repository @Inject constructor(
     private val remote: RemoteDataSource,
     private val local: LocalDataSource,
     private val appExecutors: AppExecutors

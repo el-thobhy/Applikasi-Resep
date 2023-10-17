@@ -3,11 +3,12 @@ package com.elthobhy.applikasiresep.core.utils
 import androidx.annotation.VisibleForTesting
 import java.util.concurrent.Executor
 import java.util.concurrent.Executors
+import javax.inject.Inject
 
 class AppExecutors @VisibleForTesting constructor(
-    private val diskIO: Executor
+    private val diskIO: Executor,
 ) {
-
+    @Inject
     constructor() : this(
         Executors.newSingleThreadExecutor()
     )

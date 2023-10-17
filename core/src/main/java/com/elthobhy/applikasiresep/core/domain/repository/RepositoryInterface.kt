@@ -1,7 +1,6 @@
 package com.elthobhy.applikasiresep.core.domain.repository
 
 import com.elthobhy.applikasiresep.core.data.source.Resource
-import com.elthobhy.applikasiresep.core.data.source.local.entity.EntityDetail
 import com.elthobhy.applikasiresep.core.domain.model.Domain
 import com.elthobhy.applikasiresep.core.domain.model.DomainCategory
 import com.elthobhy.applikasiresep.core.domain.model.DomainDetail

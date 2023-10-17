@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
@@ -13,17 +14,19 @@ import com.elthobhy.applikasiresep.core.utils.Constants
 import com.elthobhy.applikasiresep.core.utils.Status
 import com.elthobhy.applikasiresep.databinding.ActivityDetailCategoryBinding
 import com.elthobhy.applikasiresep.ui.detail.DetailActivity
-import org.koin.android.ext.android.inject
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class DetailCategoryActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityDetailCategoryBinding
-    private val detailCategoryViewModel by inject<DetailCategoryViewModel>()
-    private val adapterCategoryMeal by inject<DetailCategoryMealAdapter>()
+    private val detailCategoryViewModel: DetailCategoryViewModel by viewModels()
+    private lateinit var adapterCategoryMeal: DetailCategoryMealAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityDetailCategoryBinding.inflate(layoutInflater)
+        adapterCategoryMeal = DetailCategoryMealAdapter()
         setContentView(binding.root)
         val data = intent.getParcelableExtra<DomainCategory>(Constants.DATA_CATEGORY)
         showDetail(data)

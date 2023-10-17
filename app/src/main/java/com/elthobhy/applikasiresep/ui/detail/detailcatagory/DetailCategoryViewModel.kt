@@ -6,8 +6,11 @@ import androidx.lifecycle.asLiveData
 import com.elthobhy.applikasiresep.core.data.source.Resource
 import com.elthobhy.applikasiresep.core.domain.model.DomainMeal
 import com.elthobhy.applikasiresep.core.domain.usecase.UseCase
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 
-class DetailCategoryViewModel(private val useCase: UseCase) : ViewModel() {
+@HiltViewModel
+class DetailCategoryViewModel @Inject constructor(private val useCase: UseCase) : ViewModel() {
     fun getListCategory(
         strCategory: String,
         isBeef: Boolean,

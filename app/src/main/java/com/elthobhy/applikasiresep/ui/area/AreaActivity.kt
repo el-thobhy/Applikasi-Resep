@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.elthobhy.applikasiresep.core.domain.model.Domain
@@ -14,18 +15,20 @@ import com.elthobhy.applikasiresep.core.utils.Status
 import com.elthobhy.applikasiresep.databinding.ActivityAreaBinding
 import com.elthobhy.applikasiresep.ui.detail.DetailActivity
 import com.elthobhy.applikasiresep.ui.home.AdapterMain
-import org.koin.android.ext.android.inject
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class AreaActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityAreaBinding
-    private val areaViewModel by inject<AreaViewModel>()
-    private val adapterMain by inject<AdapterMain>()
+    private val areaViewModel: AreaViewModel by viewModels()
+    private lateinit var adapterMain: AdapterMain
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding= ActivityAreaBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        adapterMain = AdapterMain()
         val data = intent.getParcelableExtra<Domain>(Constants.AREA)
         showRv()
         getData(data)

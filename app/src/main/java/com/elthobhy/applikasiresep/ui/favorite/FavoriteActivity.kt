@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.elthobhy.applikasiresep.R
@@ -11,17 +12,19 @@ import com.elthobhy.applikasiresep.core.domain.model.DomainDetail
 import com.elthobhy.applikasiresep.core.utils.Constants
 import com.elthobhy.applikasiresep.databinding.ActivityFavoriteBinding
 import com.elthobhy.applikasiresep.ui.detail.DetailActivity
-import org.koin.android.ext.android.inject
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class FavoriteActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityFavoriteBinding
-    private val favoriteViewModel by inject<FavoriteViewModel>()
-    private val adapterFav by inject<AdapterFav>()
+    private val favoriteViewModel: FavoriteViewModel by viewModels()
+    private lateinit var adapterFav: AdapterFav
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding= ActivityFavoriteBinding.inflate(layoutInflater)
+        adapterFav = AdapterFav()
         setContentView(binding.root)
         getData()
         showRv()
